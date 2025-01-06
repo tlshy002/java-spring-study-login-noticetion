@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- Uncomment and your base-package here:
+         <context:component-scan
+            base-package="org.springframework.samples.web"/>  -->
+
+	<bean
+	class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"></bean>
+
+	<!-- @어노테이션으로 자동주입이 필요한 클래스가 있는 패키지 이름 작성 -->
+	<context:component-scan base-package="controller, dao"></context:component-scan>
+	
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	        <!-- Example: a logical view name of 'showMessage' is mapped to '/WEB-INF/jsp/showMessage.jsp' -->
+	        <property name="prefix" value="/home/"/>
+	        <property name="suffix" value=".jsp"/>
+	</bean>
+	
+	<!-- 마이바티스를 사용하면 반드시 들어가야하는 세가지,주입  -->
+	<bean id="datasource" 
+	class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+		p:username="hr"
+		p:password="hr"
+		p:url="jdbc:oracle:thin:@localhost:1521:xe"
+		p:driverClassName="oracle.jdbc.driver.OracleDriver">
+	</bean>
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
+		p:configLocation="classpath:mybatisConfig.xml"
+		p:dataSource-ref="datasource">
+	</bean>
+		<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory"></constructor-arg>
+	</bean>
+
+</beans>
