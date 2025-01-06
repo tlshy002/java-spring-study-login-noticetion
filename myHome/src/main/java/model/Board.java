@@ -1,9 +1,17 @@
 package model;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class Board {
+	@NotNull(message="글번호를 입력하세요")
 	private Integer seq;
+	@NotEmpty(message="작성자를 입력하세요")
 	private String id;
+	@NotEmpty(message="제목을 입력하세요")
 	private String title;
+	@NotEmpty(message="내용을 입력하세요")
 	private String content;
 	private String write_date;
 	

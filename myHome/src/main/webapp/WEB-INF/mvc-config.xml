@@ -12,7 +12,9 @@
     <!-- Uncomment and your base-package here:
          <context:component-scan
             base-package="org.springframework.samples.web"/>  -->
-
+	
+	<mvc:annotation-driven />
+	 
 	<bean
 	class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"></bean>
 

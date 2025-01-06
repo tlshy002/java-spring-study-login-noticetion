@@ -52,7 +52,7 @@ td.main { width: 30%; border: 1px solid green; }
 					</c:if>
 				</div>
 			</td>
-			<td id="content">
+			<td id="content" align="center">
 			<c:choose>
 				<c:when test="${BODY != null }">
 					<jsp:include page="${ BODY }"/>

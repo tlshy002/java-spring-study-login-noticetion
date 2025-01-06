@@ -1,7 +1,10 @@
 package controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -14,9 +17,14 @@ public class WriteController {
 	private BoardDao boardDao;
 	
 	@RequestMapping(value="/write/entryBoard.html")
-	public ModelAndView entryBoard(Board board) {
-		this.boardDao.putBoard(board);
+	public ModelAndView entryBoard(@Valid Board board, BindingResult br) {
 		ModelAndView mav = new ModelAndView("index");
+		if(br.hasErrors()) {
+			mav.addObject("BODY", "write_board.jsp");
+			mav.getModel().putAll(br.getModel());
+			return mav;
+		}
+		this.boardDao.putBoard(board);
 		mav.addObject("BODY", "writeBoardResult.jsp");
 		return mav;
 	}
