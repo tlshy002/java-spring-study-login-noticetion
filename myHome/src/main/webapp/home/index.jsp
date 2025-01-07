@@ -38,8 +38,6 @@ td.main { width: 30%; border: 1px solid green; }
 				</c:choose>
 				</div>
 				<div id="menu">
-					<a href="../beer/beer.html">■ 맥주추천</a><br/>
-					<a href="../gavabo/gavabo.html">■ 가위바위보</a><br/>
 					<a href="../home/index.html">■ 홈으로</a><br/>
 					<a href="../write/read.html">■ 게시글 보기</a><br/>
 					<c:if test="${sessionScope.loginUser != null}">
@@ -49,20 +47,24 @@ td.main { width: 30%; border: 1px solid green; }
 					<c:if test="${id != null && id !='admin' }">
 						<a href="">■ 장바구니 보기</a><br/>
 					</c:if>
-					<c:if test="${id != null && id == 'admin' }">
+					<c:if test="${sessionScope.loginUser != null && sessionScope.loginUser.id == 'admin' }">
 						<a href="">■ 상품 원산지 등록</a><br/>
 						<a href="">■ 상품 원산지 등록(form:form)</a><br/>
 						<a href="">■ 상품 등록</a><br/>
 					</c:if>
 					
-					<a href="">■ 공지사항 보기</a><br/>
+					<a href="../notice/list.html">■ 공지사항 보기</a><br/>
 					<a href="../image/imageWrite.html">■ 이미지 및 답글 게시글 쓰기</a><br/>
 					<a href="">■ 이미지 및 답글 게시글 보기</a><br/>
+					
 					<c:if test="${sessionScope.loginUser != null &&
 									sessionScope.loginUser.id=='admin' }">
 						<a href="../notice/inputForm.html">■ 공지사항 쓰기(js)</a><br/>
 						<a href="../notice/formform.html">■ 공지사항 쓰기(form:form)</a><br/>
 					</c:if>
+					
+					<a href="../beer/beer.html">■ 맥주추천</a><br/>
+					<a href="../gavabo/gavabo.html">■ 가위바위보</a><br/>
 				</div>
 			</td>
 			<td id="content" align="center">
