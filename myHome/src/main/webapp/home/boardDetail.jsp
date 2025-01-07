@@ -13,6 +13,7 @@
 <h3 align="center">게시글 상세 정보</h3>
 <div align="center">
 <form action="../write/modify.html" method="post">
+<input type="hidden" name="SEQ" value="${BOARD.seq}">
 	<table border="1">
 		<tr><th>글제목</th>
 			<td><input type="text" name="TITLE" value="${BOARD.title}"></td>

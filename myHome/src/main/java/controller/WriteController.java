@@ -20,14 +20,21 @@ public class WriteController {
 	@Autowired
 	private BoardDao boardDao;
 	
-	@RequestMapping(value="/write/modify/html") //boardDetail.jsp로부터 4개의 파라미터를 받음
+	@RequestMapping(value="/write/modify.html") //boardDetail.jsp로부터 4개의 파라미터를 받음
 	public ModelAndView modify(Integer SEQ, String TITLE, String CONTENT, String BTN) {
 		if(BTN.equals("수정")) {
-			
+			Board bbs = new Board();
+			bbs.setSeq(SEQ);
+			bbs.setTitle(TITLE);
+			bbs.setContent(CONTENT);
+			this.boardDao.updateBoart(bbs); //글번호의 게시글 변경
+			System.out.println("수정버튼 누름");
 		} else if(BTN.equals("삭제")) {
-			
+			System.out.println("삭제버튼 누름");
+			this.boardDao.deleteBoard(SEQ); //글번호의 게시글 삭제
 		}
- 		ModelAndView mav = new ModelAndView();
+		//수정 또는 삭제 작업후 목록으로 다시 돌아감
+		ModelAndView mav = new ModelAndView("redirect:/write/read.html");
 		return mav;
 	}
 	
@@ -35,17 +42,23 @@ public class WriteController {
 	public ModelAndView detail(Integer SEQ) {
 		Board bbs = this.boardDao.readDetail(SEQ); //글번호로 게시글 검색
 		ModelAndView mav = new ModelAndView("index");
-		mav.addObject("BODY", "boardDetail.jsp"); //검색된 게시글을 출력하는
-		mav.addObject("BOARD", bbs); //jsp에서 검색된 게시글을 
+		mav.addObject("BODY", "boardDetail.jsp"); //검색된 게시글을 출력하는 jsp이름
+		mav.addObject("BOARD", bbs); //jsp에서 검색된 게시글을 가져갈때 사용하는 이름
 		return mav;
 	}
 	
 	@RequestMapping(value="/write/read.html")
 	public ModelAndView read(Integer pageNo) {
+		int currentPage = 1;
 		List<Board> bbsList = this.boardDao.readBoard(pageNo);
 		ModelAndView mav = new ModelAndView("index");
 		mav.addObject("BODY", "boardList.jsp");
 		mav.addObject("BOARD",bbsList); //게시글 조회결과 bbsList를 "BOARD"라는 이름으로 저장해서 boardList.jsp에서 사용할 수 있도록함
+		mav.addObject("currentPage", currentPage);
+		int totalCount = this.boardDao.totalCount(); //전체 게시글의 개수 검색
+		int pageCount = totalCount / 5;
+		if(totalCount % 5 != 0) pageCount++;
+		mav.addObject("PAGES", pageCount);
 		return mav;
 	}
 	

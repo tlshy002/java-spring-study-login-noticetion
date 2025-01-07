@@ -16,6 +16,22 @@ public class BoardDaoImpl implements BoardDao {
 	@Autowired
 	private StartEnd se;
 	
+	
+	@Override
+	public Integer totalCount() {
+		return this.session.selectOne("boardMapper.getTotalCount");
+	}
+
+	@Override
+	public void deleteBoard(Integer seq) {
+		this.session.delete("boardMapper.deleteBoard", seq);
+	}
+
+	@Override
+	public void updateBoart(Board board) {
+		this.session.update("boardMapper.updateBoard", board);
+	}
+
 	@Override
 	public Board readDetail(Integer seq) {
 		Board bbs = this.session.selectOne("boardMapper.getBoard", seq);

@@ -22,6 +22,27 @@
 			<td>${dto.write_date}</td></tr>
 		</c:forEach>
 	</table>
+	
+	<c:set var="currentPage" value="${ requestScope.currentPage}" /> <!-- 현재페이지수 -->
+	<c:set var="startPage"
+		value="${currentPage - (currentPage % 10 == 0 ? 10 :(currentPage % 10)) + 1 }" />
+	<c:set var="endPage" value="${startPage + 9}"/>	
+	<c:set var="pageCount" value="${PAGES }"/> <!-- 페이지 수 -->
+	<c:if test="${endPage > pageCount }">
+		<c:set var="endPage" value="${pageCount }" />
+	</c:if>
+	<c:if test="${startPage > 10 }">
+		<a href="../write/read.html?pageNo=${startPage - 1 }">[이전]</a>
+	</c:if>
+	<c:forEach begin="${startPage }" end="${endPage }" var="i">
+		<c:if test="${currentPage == i }"><font size="6"></c:if>
+			<a href="../write/read.html?pageNo=${ i }">${ i }</a>
+		<c:if test="${currentPage == i }"></font></c:if>
+	</c:forEach>
+	<c:if test="${endPage < pageCount }">
+		<a href="../write/read.html?pageNo=${endPage + 1 }">[다음]</a>
+	</c:if>
+	
 </div>
 </body>
 </html>

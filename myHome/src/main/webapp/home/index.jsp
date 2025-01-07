@@ -53,10 +53,12 @@ td.main { width: 30%; border: 1px solid green; }
 						<a href="">■ 상품 원산지 등록</a><br/>
 						<a href="">■ 상품 등록</a><br/>
 					</c:if>
+					
 					<a href="">■ 공지사항 보기</a><br/>
 					<a href="../image/imageWrite.html">■ 이미지 및 답글 게시글 쓰기</a><br/>
 					<a href="">■ 이미지 및 답글 게시글 보기</a><br/>
-					<c:if test="${id != null && id=='admin' }">
+					<c:if test="${sessionScope.loginUser != null &&
+									sessionScope.loginUser.id=='admin' }">
 						<a href="">■ 공지사항 쓰기</a><br/>
 					</c:if>
 				</div>
