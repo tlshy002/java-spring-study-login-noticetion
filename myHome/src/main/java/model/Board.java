@@ -1,6 +1,7 @@
 package model;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -10,8 +11,10 @@ public class Board {
 //	@NotEmpty(message="작성자를 입력하세요")
 	private String id;
 	@NotEmpty(message="제목을 입력하세요")
+	@Size(min=0,max=10, message="{min}보다 크고 {max}보다 적어야 합니다.")
 	private String title;
 	@NotEmpty(message="내용을 입력하세요")
+	@Size(min=0,max=10, message="{min}보다 크고 {max}보다 적어야 합니다.")
 	private String content;
 	private String write_date;
 	
