@@ -28,12 +28,13 @@ function check(frm) {
 <form:form action="../write/entryBoard.html" method="post" modelAttribute="board"> <!-- onsubmit,JS로 폼체크 => js대신 폼폼으로 변경 -->
 <p>자유롭게 글을 작성하신 후 글올리기 버튼을 누르면, 작성한 글이 게시글에 올라갑니다.</p>
 <table border="1">
-	<tr><th>글번호</th>
-		<td><form:input path="seq"/> <!-- 주입되는 Board객체의 변수이름 -->
+<!-- <tr><th>글번호</th>
+		<td><form:input path="seq"/> <!-- 주입되는 Board객체의 변수이름 
 			<font color="red"><form:errors path="seq"/></font></td></tr> 
 	<tr><th>작성자</th>
 		<td><form:input path="id"/>
-		<font color="red"><form:errors path="id"/></font></td></tr>
+		<font color="red"><form:errors path="id"/></font></td></tr>  -->
+		
 	<tr><th>글제목</th><td>
 		<form:input path="title" placeHolder="제목을 입력하세요"  size="30"/>
 		<font color="red"><form:errors path="title"/></font></td></tr>

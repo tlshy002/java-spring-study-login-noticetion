@@ -28,14 +28,23 @@ td.main { width: 30%; border: 1px solid green; }
 		<tr>
 			<td width="40%" height="300px" class="main">
 				<div id="login">
-					<jsp:include page="../login/login.html"/>
+				<c:choose>
+					<c:when test="${sessionScope.loginUser == null}">
+						<jsp:include page="../login/login.html"/>
+					</c:when>
+					<c:otherwise>
+						<jsp:include page="logout.jsp"/>
+					</c:otherwise>
+				</c:choose>
 				</div>
 				<div id="menu">
 					<a href="../beer/beer.html">■ 맥주추천</a><br/>
 					<a href="../gavabo/gavabo.html">■ 가위바위보</a><br/>
 					<a href="../home/index.html">■ 홈으로</a><br/>
 					<a href="">■ 게시글 보기</a><br/>
-					<a href="../write/write.html">■ 게시글 쓰기</a><br/>
+					<c:if test="${sessionScope.loginUser != null}">
+						<a href="../write/write.html">■ 게시글 쓰기</a><br/>
+					</c:if>
 					<a href="">■ 상품 보기</a><br/>
 					<c:if test="${id != null && id !='admin' }">
 						<a href="">■ 장바구니 보기</a><br/>
