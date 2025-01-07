@@ -7,13 +7,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import model.Board;
+import model.StartEnd;
 
 @Repository
 public class BoardDaoImpl implements BoardDao {
 	@Autowired
 	private SqlSession session;
+	@Autowired
+	private StartEnd se;
 	
-	
+	@Override
+	public Board readDetail(Integer seq) {
+		Board bbs = this.session.selectOne("boardMapper.getBoard", seq);
+		return bbs;
+	}
+
 	@Override
 	public Integer getMaxSeq() {
 		Integer maxSeq = this.session.selectOne("boardMapper.getMaxSeq");
@@ -29,7 +37,12 @@ public class BoardDaoImpl implements BoardDao {
 
 	@Override
 	public List<Board> readBoard(Integer pageNo) {
-		return null;
+		if(pageNo == null) pageNo = 1;
+		int start = (pageNo - 1) * 5;
+		int end = ((pageNo - 1) * 5) + 6;
+		se.setStart(start);
+		se.setEnd(end);
+		return this.session.selectList("boardMapper.getBoardList", se);
 	}
 
 }

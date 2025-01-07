@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -17,6 +19,35 @@ import model.LoginUser;
 public class WriteController {
 	@Autowired
 	private BoardDao boardDao;
+	
+	@RequestMapping(value="/write/modify/html") //boardDetail.jsp로부터 4개의 파라미터를 받음
+	public ModelAndView modify(Integer SEQ, String TITLE, String CONTENT, String BTN) {
+		if(BTN.equals("수정")) {
+			
+		} else if(BTN.equals("삭제")) {
+			
+		}
+ 		ModelAndView mav = new ModelAndView();
+		return mav;
+	}
+	
+	@RequestMapping(value="/write/detail.html")
+	public ModelAndView detail(Integer SEQ) {
+		Board bbs = this.boardDao.readDetail(SEQ); //글번호로 게시글 검색
+		ModelAndView mav = new ModelAndView("index");
+		mav.addObject("BODY", "boardDetail.jsp"); //검색된 게시글을 출력하는
+		mav.addObject("BOARD", bbs); //jsp에서 검색된 게시글을 
+		return mav;
+	}
+	
+	@RequestMapping(value="/write/read.html")
+	public ModelAndView read(Integer pageNo) {
+		List<Board> bbsList = this.boardDao.readBoard(pageNo);
+		ModelAndView mav = new ModelAndView("index");
+		mav.addObject("BODY", "boardList.jsp");
+		mav.addObject("BOARD",bbsList); //게시글 조회결과 bbsList를 "BOARD"라는 이름으로 저장해서 boardList.jsp에서 사용할 수 있도록함
+		return mav;
+	}
 	
 	@RequestMapping(value="/write/entryBoard.html")
 	public ModelAndView entryBoard(@Valid Board board, BindingResult br, HttpSession session) {

@@ -41,7 +41,7 @@ td.main { width: 30%; border: 1px solid green; }
 					<a href="../beer/beer.html">■ 맥주추천</a><br/>
 					<a href="../gavabo/gavabo.html">■ 가위바위보</a><br/>
 					<a href="../home/index.html">■ 홈으로</a><br/>
-					<a href="">■ 게시글 보기</a><br/>
+					<a href="../write/read.html">■ 게시글 보기</a><br/>
 					<c:if test="${sessionScope.loginUser != null}">
 						<a href="../write/write.html">■ 게시글 쓰기</a><br/>
 					</c:if>

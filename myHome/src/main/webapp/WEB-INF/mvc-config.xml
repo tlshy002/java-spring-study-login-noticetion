@@ -15,6 +15,8 @@
 	
 	<mvc:annotation-driven />
 	 
+	<bean id="startEnd" class="model.StartEnd"></bean>
+	
 	<bean
 	class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"></bean>
 
