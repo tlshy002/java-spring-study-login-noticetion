@@ -16,6 +16,11 @@ public class NoticeDaoImpl implements NoticeDao {
 	
 	
 	@Override
+	public Notice getNotice(Integer num) {
+		return this.sqlSession.selectOne("noticeMapper.getNotice", num);
+	}
+
+	@Override
 	public Integer getCount() {
 		return this.sqlSession.selectOne("noticeMapper.getNoticeCount");
 	}

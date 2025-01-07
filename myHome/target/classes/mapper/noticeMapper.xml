@@ -3,7 +3,11 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="noticeMapper">
 
-
+	<select id="getNotice" parameterType="Integer" resultType="model.Notice">
+		select num, title, writer, content, 
+				to_char(write_date,'YYYY/MM/DD HH24:MI:SS') "write_date"
+		from notice_tbl where num = #{num}
+	</select>
 
 	<select id="getNoticeCount" resultType="Integer">
 		select count(*) from notice_tbl

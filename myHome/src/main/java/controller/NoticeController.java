@@ -21,6 +21,21 @@ public class NoticeController {
 	@Autowired
 	private NoticeDao noticeDao;
 	
+	@RequestMapping(value="/notice/detail.html")
+	public ModelAndView detail(Integer NO, HttpSession session) {
+		Notice notice = this.noticeDao.getNotice(NO);//글번호로 공지글 검색
+		ModelAndView mav = new ModelAndView("index");
+		LoginUser user = (LoginUser)session.getAttribute("loginUser");
+		if(user != null && user.getId().equals("admin")) {//관리자로 로그인 한 경우
+			mav.addObject("BODY","noticeDetailAdmin.jsp");
+		}else {//관리지가 아닌 경우
+			//mav.addObject("BODY","noticeDetail.jsp");
+			mav.addObject("BODY","noticeDetailFF.jsp");//form:form
+		}
+		//mav.addObject("NOTICE",notice);
+		mav.addObject(notice);//조회결과 객체 주입
+		return mav;
+	}
 	
 	@RequestMapping(value="/notice/list.html")
 	public ModelAndView noticeList(Integer pageNo) {

@@ -11,4 +11,6 @@ public interface NoticeDao {
 	
 	Integer getCount();//공지글 갯수 검색
 	List<Notice> getNoticeList(StartEnd st);//공지글 목록 검색
+	
+	Notice getNotice(Integer num);//글번호로 공지글 내용검색(상세보기)
 }
