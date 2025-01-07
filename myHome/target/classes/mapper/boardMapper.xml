@@ -2,6 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="boardMapper">
+	
+	<select id="getMaxSeq" resultType="Integer">
+		select max(seq) from free_board
+	</select>
 	<insert id="putBoard" parameterType="model.Board">
 		insert into free_board values(#{id},#{title},#{content},sysdate,#{seq})
 	</insert>

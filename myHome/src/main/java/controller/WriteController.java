@@ -1,5 +1,6 @@
 package controller;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import dao.BoardDao;
 import model.Board;
+import model.LoginUser;
 
 @Controller
 public class WriteController {
@@ -17,13 +19,16 @@ public class WriteController {
 	private BoardDao boardDao;
 	
 	@RequestMapping(value="/write/entryBoard.html")
-	public ModelAndView entryBoard(@Valid Board board, BindingResult br) {
+	public ModelAndView entryBoard(@Valid Board board, BindingResult br, HttpSession session) {
 		ModelAndView mav = new ModelAndView("index");
 		if(br.hasErrors()) {
 			mav.addObject("BODY", "write_board.jsp");
 			mav.getModel().putAll(br.getModel());
 			return mav;
 		}
+		//글번호(자동증가), 작성자(HttpSession에서 가져온다)를 설정한다
+		LoginUser loginUser = (LoginUser)session.getAttribute("loginUser");
+		board.setId(loginUser.getId()); //계정설정
 		this.boardDao.putBoard(board);
 		mav.addObject("BODY", "writeBoardResult.jsp");
 		return mav;
