@@ -27,13 +27,14 @@ public class NoticeController {
 		ModelAndView mav = new ModelAndView("index");
 		LoginUser user = (LoginUser)session.getAttribute("loginUser");
 		if(user != null && user.getId().equals("admin")) {//관리자로 로그인 한 경우
-			mav.addObject("BODY","noticeDetailAdmin.jsp");
+			mav.addObject("BODY","noticeDetailAdmin.jsp"); //일반form
+			//mav.addObject("BODY","noticeDetailAdminFF.jsp"); //form:form
 		}else {//관리지가 아닌 경우
-			//mav.addObject("BODY","noticeDetail.jsp");
+			//mav.addObject("BODY","noticeDetail.jsp"); //일반form
 			mav.addObject("BODY","noticeDetailFF.jsp");//form:form
 		}
-		//mav.addObject("NOTICE",notice);
-		mav.addObject(notice);//조회결과 객체 주입
+		mav.addObject("NOTICE",notice); // => 폼폼이 아닌 일반 폼을 사용하는 Admin.jsp
+		//mav.addObject(notice);//조회결과 객체 주입 => 폼폼사용하는 FF.jsp일때는 객체 주입을 사용함
 		return mav;
 	}
 	
