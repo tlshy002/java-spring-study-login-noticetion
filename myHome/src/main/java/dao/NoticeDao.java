@@ -13,4 +13,7 @@ public interface NoticeDao {
 	List<Notice> getNoticeList(StartEnd st);//공지글 목록 검색
 	
 	Notice getNotice(Integer num);//글번호로 공지글 내용검색(상세보기)
+	
+	void updateNotice(Notice notice); //공지글 수정 => 글제목,글내용 등 매개변수로 객체필요(DTO)
+	void deleteNotice(Integer num); //공지글 삭제
 }

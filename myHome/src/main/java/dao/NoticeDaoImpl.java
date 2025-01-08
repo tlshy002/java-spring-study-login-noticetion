@@ -16,6 +16,16 @@ public class NoticeDaoImpl implements NoticeDao {
 	
 	
 	@Override
+	public void updateNotice(Notice notice) {
+		this.sqlSession.update("noticeMapper.updateNotice", notice);
+	}
+
+	@Override
+	public void deleteNotice(Integer num) {
+		this.sqlSession.delete("noticeMapper.deleteNotice", num);
+	}
+
+	@Override
 	public Notice getNotice(Integer num) {
 		return this.sqlSession.selectOne("noticeMapper.getNotice", num);
 	}

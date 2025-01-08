@@ -21,6 +21,27 @@ public class NoticeController {
 	@Autowired
 	private NoticeDao noticeDao;
 	
+	
+	@RequestMapping(value="/notice/modify.html")
+	public ModelAndView modify(Integer NUM, String TITLE, String CONTENT, String BTN) {
+		ModelAndView mav = new ModelAndView("index");
+
+		if(BTN.equals("삭 제")) {
+			this.noticeDao.deleteNotice(NUM);
+			mav.addObject("BODY", "noticeDeleteResult.jsp");
+		} else if(BTN.equals("수 정")) {
+			Notice notice = new Notice();
+			
+			notice.setNum(NUM); 
+			notice.setTitle(TITLE);
+			notice.setContent(CONTENT); //폼폼을 사용하면 이부분이 필요없음
+			
+			this.noticeDao.updateNotice(notice);
+			mav.addObject("BODY", "noticeUpdateResult.jsp");
+		}
+		return mav;
+	}
+	
 	@RequestMapping(value="/notice/detail.html")
 	public ModelAndView detail(Integer NO, HttpSession session) {
 		Notice notice = this.noticeDao.getNotice(NO);//글번호로 공지글 검색
