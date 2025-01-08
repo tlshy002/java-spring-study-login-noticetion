@@ -48,7 +48,7 @@ td.main { width: 30%; border: 1px solid green; }
 						<a href="">■ 장바구니 보기</a><br/>
 					</c:if>
 					<c:if test="${sessionScope.loginUser != null && sessionScope.loginUser.id == 'admin' }">
-						<a href="">■ 상품 원산지 등록</a><br/>
+						<a href="../nation/inputNation.html">■ 상품 원산지 등록</a><br/>
 						<a href="">■ 상품 원산지 등록(form:form)</a><br/>
 						<a href="">■ 상품 등록</a><br/>
 					</c:if>
