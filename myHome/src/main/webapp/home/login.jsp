@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div align="right"><a href="index.jsp?BODY=userEntry.jsp">가입하기</a></div>
+<div align="right"><a href="../entry/userEntry.html">가입하기</a></div>
 <div align="center">
 
 

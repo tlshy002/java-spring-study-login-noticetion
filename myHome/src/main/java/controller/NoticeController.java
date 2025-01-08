@@ -22,6 +22,31 @@ public class NoticeController {
 	private NoticeDao noticeDao;
 	
 	
+	@RequestMapping(value="/notice/modifyFF.html")
+	public ModelAndView modifyFF(@Valid Notice notice, BindingResult br, String BTN) {
+		System.out.println("modifyFF ok");
+		ModelAndView mav = new ModelAndView("index");
+		
+		if(br.hasErrors()) {
+			mav.addObject("BODY", "noticeDetailAdminFF.jsp");
+			mav.getModel().putAll(br.getModel());
+			return mav;
+		}
+		if(BTN.equals("삭 제")) {
+			System.out.println("delete ok");
+			this.noticeDao.deleteNotice(notice.getNum());
+			mav.addObject("BODY", "noticeDeleteResult.jsp");
+		} else if(BTN.equals("수 정")) {
+			System.out.println("update ok");
+			this.noticeDao.updateNotice(notice);
+			mav.addObject("BODY", "noticeUpdateResult.jsp");
+		} else {
+			System.out.println("ELSE");
+		}
+		
+		return mav;
+	}
+	
 	@RequestMapping(value="/notice/modify.html")
 	public ModelAndView modify(Integer NUM, String TITLE, String CONTENT, String BTN) {
 		ModelAndView mav = new ModelAndView("index");
@@ -47,15 +72,16 @@ public class NoticeController {
 		Notice notice = this.noticeDao.getNotice(NO);//글번호로 공지글 검색
 		ModelAndView mav = new ModelAndView("index");
 		LoginUser user = (LoginUser)session.getAttribute("loginUser");
+		
 		if(user != null && user.getId().equals("admin")) {//관리자로 로그인 한 경우
-			mav.addObject("BODY","noticeDetailAdmin.jsp"); //일반form
-			//mav.addObject("BODY","noticeDetailAdminFF.jsp"); //form:form
+			//mav.addObject("BODY","noticeDetailAdmin.jsp"); //일반form
+			mav.addObject("BODY","noticeDetailAdminFF.jsp"); //form:form
 		}else {//관리지가 아닌 경우
 			//mav.addObject("BODY","noticeDetail.jsp"); //일반form
 			mav.addObject("BODY","noticeDetailFF.jsp");//form:form
 		}
-		mav.addObject("NOTICE",notice); // => 폼폼이 아닌 일반 폼을 사용하는 Admin.jsp
-		//mav.addObject(notice);//조회결과 객체 주입 => 폼폼사용하는 FF.jsp일때는 객체 주입을 사용함
+		//mav.addObject("NOTICE",notice); // => 폼폼이 아닌 일반 폼을 사용하는 Admin.jsp
+		mav.addObject(notice);//조회결과 객체 주입 => 폼폼사용하는 FF.jsp일때는 객체 주입을 사용함
 		return mav;
 	}
 	

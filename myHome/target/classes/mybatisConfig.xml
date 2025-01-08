@@ -6,5 +6,6 @@
 		<mapper resource="mapper/boardMapper.xml" />
 		<mapper resource="mapper/loginMapper.xml" />
 		<mapper resource="mapper/noticeMapper.xml" />
+		<mapper resource="mapper/checkMapper.xml" />
 	</mappers>
 </configuration>
