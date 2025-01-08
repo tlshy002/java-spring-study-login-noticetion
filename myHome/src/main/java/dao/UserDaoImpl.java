@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import model.LoginUser;
+import model.User;
 
 @Repository
 public class UserDaoImpl implements UserDao {
@@ -16,4 +17,8 @@ public class UserDaoImpl implements UserDao {
 		return this.sqlSession.selectOne("loginMapper.getUser", user);
 	}
 
+	@Override
+	public void putUser(User user) {
+		this.sqlSession.insert("loginMapper.putUser", user);
+	}
 }
