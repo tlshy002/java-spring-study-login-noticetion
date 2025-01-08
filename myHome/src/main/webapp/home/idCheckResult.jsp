@@ -14,7 +14,7 @@
 	<input type="submit" value="중복검사"/>
 </form>
 <c:choose>
-	<c:when test="${DUP == null }">
+	<c:when test="${DUP == 'NO' }">
 		${ID }는 사용 가능합니다. <input type="button" value="사용" onclick="idOk('${ID}')"/>
 	</c:when>
 	<c:otherwise>
