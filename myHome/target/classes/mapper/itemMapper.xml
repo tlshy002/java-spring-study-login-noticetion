@@ -3,6 +3,22 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="itemMapper">
 	
+	
+	
+	<select id="getTotalItems" resultType="Integer">
+		select count(*) from sellingitems_tbl
+	</select>
+	
+	<select id="getItems" parameterType="model.StartEnd" resultType="model.Item">
+		select item_code,item_title,price,
+				madein ,regdate "reg_date"
+		from( select rownum rn, a.*
+		        from (select item_code,item_title,price,madein,
+		                to_char(reg_date,'YYYY/MM/DD') regdate  from sellingitems_tbl) a
+		       )
+		where rn > #{start} and rn <![CDATA[<]]> #{end}
+	</select>
+	
 	<select id="getNations" resultType="model.Nation">
 		select * from madein_tbl
 	</select>

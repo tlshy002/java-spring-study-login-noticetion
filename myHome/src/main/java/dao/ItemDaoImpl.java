@@ -8,11 +8,23 @@ import org.springframework.stereotype.Repository;
 
 import model.Item;
 import model.Nation;
+import model.StartEnd;
 
 @Repository
 public class ItemDaoImpl implements ItemDao {
 	@Autowired
 	private SqlSession sqlSession;
+
+	
+	@Override
+	public Integer getTotalItems() {
+		return this.sqlSession.selectOne("itemMapper.getTotalItems");
+	}
+
+	@Override
+	public List<Item> getItems(StartEnd se) {
+		return this.sqlSession.selectList("itemMapper.getItems", se);
+	}
 
 	@Override
 	public List<Nation> getNation() {

@@ -43,7 +43,7 @@ td.main { width: 30%; border: 1px solid green; }
 					<c:if test="${sessionScope.loginUser != null}">
 						<a href="../write/write.html">■ 게시글 쓰기</a><br/>
 					</c:if>
-					<a href="">■ 상품 보기</a><br/>
+					<a href="../item/itemList.html">■ 상품 보기</a><br/>
 					<c:if test="${id != null && id !='admin' }">
 						<a href="">■ 장바구니 보기</a><br/>
 					</c:if>

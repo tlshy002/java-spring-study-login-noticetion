@@ -14,11 +14,42 @@ import org.springframework.web.servlet.ModelAndView;
 import dao.ItemDao;
 import model.Item;
 import model.Nation;
+import model.StartEnd;
 
 @Controller
 public class ItemController {
 	@Autowired
 	private ItemDao itemDao;
+	
+	
+	@RequestMapping(value="/item/itemList.html")
+	public ModelAndView itemList(Integer PAGE_NUM) { //itemList.jsp에서 페이지번호를 클릭했을때 넘어오는 값을 매개변수로 받음
+		int currentPage = 1;
+		if(PAGE_NUM != null) currentPage = PAGE_NUM;
+		
+		int start = (currentPage - 1) * 5;
+		int end = ((currentPage - 1) * 5) + 6;
+		
+		StartEnd se = new StartEnd();
+		se.setStart(start);
+		se.setEnd(end);
+		
+		List<Item> itemList = this.itemDao.getItems(se); //5개의 상품목록 검색
+		Integer totalCount = this.itemDao.getTotalItems(); //전체 상품 개수 검색
+		
+		int pageCount = totalCount / 5;
+		if(totalCount % 5 != 0) pageCount++;
+		
+		ModelAndView mav = new ModelAndView("index");
+		mav.addObject("startRow", start);
+		mav.addObject("endRow", end);
+		mav.addObject("total", totalCount);
+		mav.addObject("ITEMS", itemList);
+		mav.addObject("pageCount", pageCount);
+		mav.addObject("currentPage", currentPage);
+		mav.addObject("BODY", "itemsList.jsp");
+		return mav;
+	}
 	
 	@RequestMapping(value="/item/register.html")
 	public ModelAndView register(@Valid Item item, BindingResult br, HttpSession session) {
