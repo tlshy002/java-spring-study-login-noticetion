@@ -23,6 +23,26 @@ public class ItemController {
 	private ItemDao itemDao;
 	
 	
+	@RequestMapping(value="/item/modifyff.html")
+	public ModelAndView modifyff(@Valid Item item, BindingResult br, String BTN) {
+		ModelAndView mav = new ModelAndView("index");
+		if(br.hasErrors()) {
+			mav.addObject("BODY", "itemDetailAdminFF.jsp");
+			List<Nation> nationList = this.itemDao.getNation(); //원산지 목록을 검색
+			mav.addObject("NATIONS", nationList);
+			mav.getModel().putAll(br.getModel());
+			return mav;
+		}
+		if(BTN.equals("삭제")) {
+			this.itemDao.deleteItem(item.getItem_code());
+			mav.addObject("BODY", "itemDeleteResult.jsp");
+		} else if(BTN.equals("수정")) {
+			this.itemDao.updateItem(item);
+			mav.addObject("BODY", "itemUpdateResult.jsp");
+		}
+		return mav;
+	}
+	
 	@RequestMapping(value="/item/modify.html")
 	public ModelAndView modify(String CODE, String NAME, Integer PRICE, String NATION, String SPEC ,String BTN) {
 		ModelAndView mav = new ModelAndView("index");
