@@ -27,7 +27,8 @@ function codeOk(){
 	//즉, 자식JSP에서 부모JSP로 데이터 전송
 	opener.document.itemFrm.item_code.value = document.frm.CODE.value;
 	opener.document.itemFrm.item_code.readOnly = true;
-	opener.document.itemFrm.codeChecked.value = "YES";//중복검사용 파라미터에 값을 넣는다. => 중복검사 했는지 안했는지 확인용 값할당
+	opener.document.itemFrm.codeChecked.value = "YES";//중복검사용 파라미터에 값을 넣는다. 
+	// ㄴ=> 중복검사 했는지 안했는지 확인용 값("YES")할당
 	self.close();//팝업창을 닫는다.
 }
 </script>

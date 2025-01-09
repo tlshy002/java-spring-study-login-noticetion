@@ -9,7 +9,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<c:set var="dto" value="${ITEM }"/>
 <div align="center">
 <h3>상품 상세 정보</h3>
 <table>
