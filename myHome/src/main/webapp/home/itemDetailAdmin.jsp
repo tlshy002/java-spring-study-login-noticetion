@@ -12,7 +12,7 @@
 <c:set var="dto" value="${ITEM }"/>
 <div align="center">
 <h3>상품 상세 정보</h3>
-<form action="itemModify.do" method="post" onsubmit="return check(this)">
+<form action="../item/modify.html" method="post" onsubmit="return check(this)">
 <input type="hidden" name="CODE" value="${dto.item_code}">
 <table>
 	<tr><th>상품번호</th><td>${dto.item_code}</td></tr>

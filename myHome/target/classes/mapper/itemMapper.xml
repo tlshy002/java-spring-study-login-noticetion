@@ -4,6 +4,14 @@
 <mapper namespace="itemMapper">
 	
 	
+	<update id="updateItem" parameterType="model.Item">
+		update sellingitems_tbl set item_title=#{item_title}, madein=#{madein}, 
+				item_spec=#{item_spec}, price=#{price} where item_code = #{item_code}
+	</update>
+	<delete id="deleteItem" parameterType="String">
+		delete from sellingitems_tbl where item_code = #{code}
+	</delete>
+	
 	
 	<select id="getItem" parameterType="String" resultType="model.Item">
 		select item_code, item_title, price, madein, 

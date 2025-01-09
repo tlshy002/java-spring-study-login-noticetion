@@ -8,6 +8,9 @@ import model.StartEnd;
 
 
 public interface ItemDao {
+	void updateItem(Item item); //상품코드로 상품정보 변경
+	void deleteItem(String code); //상품코드로 상품 삭제
+	
 	Item getItem(String code); //상품코드로 상품 검색
 	
 	Integer getTotalItems(); //전체 상품 개수 검색

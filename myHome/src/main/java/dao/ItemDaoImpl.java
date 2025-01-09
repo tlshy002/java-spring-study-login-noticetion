@@ -18,6 +18,16 @@ public class ItemDaoImpl implements ItemDao {
 	
 	
 	@Override
+	public void updateItem(Item item) {
+		this.sqlSession.update("itemMapper.updateItem", item);
+	}
+
+	@Override
+	public void deleteItem(String code) {
+		this.sqlSession.delete("itemMapper.deleteItem", code);
+	}
+
+	@Override
 	public Item getItem(String code) {
 		return this.sqlSession.selectOne("itemMapper.getItem", code);
 	}

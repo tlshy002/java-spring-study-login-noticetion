@@ -23,8 +23,26 @@ public class ItemController {
 	private ItemDao itemDao;
 	
 	
-	
-	
+	@RequestMapping(value="/item/modify.html")
+	public ModelAndView modify(String CODE, String NAME, Integer PRICE, String NATION, String SPEC ,String BTN) {
+		ModelAndView mav = new ModelAndView("index");
+		
+		if(BTN.equals("삭제")) {
+			this.itemDao.deleteItem(CODE);
+			mav.addObject("BODY", "itemDeleteResult.jsp");
+		} else if(BTN.equals("수정")) {
+			Item item = new Item();
+			item.setItem_code(CODE);
+			item.setItem_title(NAME);
+			item.setPrice(PRICE);
+			item.setMadein(NATION);
+			item.setItem_spec(SPEC);
+			
+			this.itemDao.updateItem(item);
+			mav.addObject("BODY", "itemUpdateResult.jsp");
+		}
+		return mav;
+	}
 	
 	@RequestMapping(value="/item/detail.html")
 	public ModelAndView detail(String CODE, HttpSession session) { //세션에서 계정을 찾아봐야하기 때문에 session필요
