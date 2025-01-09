@@ -16,6 +16,19 @@ public class ItemController {
 	@Autowired
 	private ItemDao itemDao;
 	
+	@RequestMapping(value="/item/codecheck.html")
+	public ModelAndView codecheck(String CODE) {
+		ModelAndView mav = new ModelAndView("codeCheckResult");
+		Integer count = this.itemDao.getCodeDup(CODE); 
+		if(count > 0) { //이미 동일한 코드의 상품이 존재함
+			mav.addObject("DUP","YES");
+		} else { //동일한 코드의 상품이 없음
+			mav.addObject("DUP","NO");
+		}
+		mav.addObject("CODE",CODE);
+		return mav;
+	}
+	
 	@RequestMapping(value="/item/entry.html")
 	public ModelAndView form() {
 		ModelAndView mav = new ModelAndView("index");
