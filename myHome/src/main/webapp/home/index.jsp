@@ -44,8 +44,9 @@ td.main { width: 30%; border: 1px solid green; }
 						<a href="../write/write.html">■ 게시글 쓰기</a><br/>
 					</c:if>
 					<a href="../item/itemList.html">■ 상품 보기</a><br/>
-					<c:if test="${id != null && id !='admin' }">
-						<a href="">■ 장바구니 보기</a><br/>
+					<c:if test="${sessionScope.loginUser != null &&
+							sessionScope.loginUser.id != 'admin' }">
+						<a href="../cart/show.html">■ 장바구니 보기</a><br/>
 					</c:if>
 					<c:if test="${sessionScope.loginUser != null && sessionScope.loginUser.id == 'admin' }">
 						<a href="../nation/inputNation.html">■ 상품 원산지 등록</a><br/>
