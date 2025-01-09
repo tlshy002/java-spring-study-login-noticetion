@@ -44,11 +44,11 @@
 </c:if>
 <c:forEach begin="${startPage}" end="${endPage}" var="i">
 	<c:if test="${currentPage == i}"><font size="6"></c:if>
-	<a href="itemsList.do?PAGE_NUM=${ i }">${ i }</a>
+	<a href="../item/itemList.html?PAGE_NUM=${ i }">${ i }</a>
 	<c:if test="${currentPage == i}"></font></c:if>
 </c:forEach>
 <c:if test="${endPage < pageCount}">
-	<a href="itemsList.do?PAGE_NUM=${endPage + 1 }">[다음]</a>
+	<a href="../item/itemList.html?PAGE_NUM=${endPage + 1 }">[다음]</a>
 </c:if>
 </div>
 </body>
