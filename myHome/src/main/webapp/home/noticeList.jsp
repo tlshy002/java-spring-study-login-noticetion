@@ -29,15 +29,15 @@
 	<c:set var="endPage" value="${pageCount }" />
 </c:if>
 <c:if test="${startPage > 10 }">
-	<a href="../notice/list.html?PAGE_NUM=${startPage - 1 }">[이전]</a>
+	<a href="../notice/list.html?pageNo=${startPage - 1 }">[이전]</a>
 </c:if>
 <c:forEach begin="${startPage }" end="${endPage }" var="i">
 	<c:if test="${currentPage == i }"><font size="6"></c:if>
-		<a href="../notice/list.html?PAGE_NUM=${ i }">${ i }</a>
+		<a href="../notice/list.html?pageNo=${ i }">${ i }</a>
 	<c:if test="${currentPage == i }"></font></c:if>
 </c:forEach>
 <c:if test="${endPage < pageCount }">
-	<a href="../notice/list.html?PAGE_NUM=${endPage + 1 }">[다음]</a>
+	<a href="../notice/list.html?pageNo=${endPage + 1 }">[다음]</a>
 </c:if>
 </div>
 </body>

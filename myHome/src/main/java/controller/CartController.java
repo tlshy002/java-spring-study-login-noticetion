@@ -13,6 +13,21 @@ import model.LoginUser;
 public class CartController {
 
 	
+	@RequestMapping(value="/cart/show.html")
+	public ModelAndView show(HttpSession session) {
+		LoginUser user = (LoginUser)session.getAttribute("loginUser"); //세션에서 계정을 찾음
+		Cart cart = (Cart)session.getAttribute("CART"); //세션에서 장바구니를 찾음
+		ModelAndView mav = new ModelAndView("index"); 
+		
+		if(cart != null) { //장바구니가 세션에 존재하는 경우
+			
+		} else { //장바귄가 세션에 없는 경우
+			mav.addObject("CARTLIST", null);
+		}
+		mav.addObject("BODY", "cartList.jsp");
+		return mav;
+	}
+	
 	@RequestMapping(value="/cart/addCart.html")
 	public ModelAndView addCart(String CODE, HttpSession session) {
 		LoginUser user = (LoginUser)session.getAttribute("loginUser");
@@ -30,7 +45,7 @@ public class CartController {
 			mav.addObject("CODE", CODE);
 			mav.addObject("NUM", 1);
 			session.setAttribute("CART", cart); //세션에 장바구니(Cart)를 저장함
+			return mav;
 		}
-		return null;
 	}
 }
