@@ -30,7 +30,8 @@
 			여<form:radiobutton path="gender" value="F"/>
 			<font color="red"><form:errors path="gender"/></font></td></tr>
 	<tr><th>이메일</th><td><form:input path="email"/>/ </td></tr>
-	<tr><th>생 일</th><td><input type="date" name="birth"/></td></tr>
+	<tr><th>생 일</th><td><input type="date" name="birth"/>
+		<font color="red"><form:errors path="birth"/></font></td></tr>
 	<tr><th>직 업</th><td><form:select path="job">
 		<form:option value="학 생">학 생</form:option>
 		<form:option value="회사원">회사원</form:option>

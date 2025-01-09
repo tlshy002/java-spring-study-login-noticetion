@@ -50,7 +50,7 @@ td.main { width: 30%; border: 1px solid green; }
 					<c:if test="${sessionScope.loginUser != null && sessionScope.loginUser.id == 'admin' }">
 						<a href="../nation/inputNation.html">■ 상품 원산지 등록</a><br/>
 						<a href="">■ 상품 원산지 등록(form:form)</a><br/>
-						<a href="../item/imageWrite.html">■ 상품 등록</a><br/>
+						<a href="../item/entry.html">■ 상품 등록</a><br/>
 					</c:if>
 					
 					<a href="../notice/list.html">■ 공지사항 보기</a><br/>

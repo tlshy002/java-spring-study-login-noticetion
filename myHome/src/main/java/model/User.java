@@ -20,6 +20,7 @@ public class User {
 	private Integer grade;
 	@NotEmpty(message="이메일을 입력하세요")
 	private String email;
+	@NotEmpty(message="날짜를 선택하세요.")
 	private String birth;
 	private String job;
 	
