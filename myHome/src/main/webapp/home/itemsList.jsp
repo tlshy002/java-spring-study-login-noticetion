@@ -20,7 +20,7 @@
 		<th>ºñ °í</th></tr>
 	<c:forEach var="item" items="${ITEMS}">
 		<tr><td>${item.item_code }</td>
-			<td><a href="itemDetail.do?CODE=${item.item_code }">${item.item_title }</a></td>
+			<td><a href="../item/detail.html?CODE=${item.item_code }">${item.item_title }</a></td>
 			<td><fmt:formatNumber value="${item.price }" groupingUsed="true" currencySymbol="£Ü"/></td>
 			<td>${item.madein }</td>
 			<td>${item.reg_date }</td>

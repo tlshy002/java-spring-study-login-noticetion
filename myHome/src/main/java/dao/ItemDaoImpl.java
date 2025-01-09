@@ -16,6 +16,12 @@ public class ItemDaoImpl implements ItemDao {
 	private SqlSession sqlSession;
 
 	
+	
+	@Override
+	public Item getItem(String code) {
+		return this.sqlSession.selectOne("itemMapper.getItem", code);
+	}
+
 	@Override
 	public Integer getTotalItems() {
 		return this.sqlSession.selectOne("itemMapper.getTotalItems");

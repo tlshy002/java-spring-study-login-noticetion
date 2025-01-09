@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import dao.ItemDao;
 import model.Item;
+import model.LoginUser;
 import model.Nation;
 import model.StartEnd;
 
@@ -21,6 +22,30 @@ public class ItemController {
 	@Autowired
 	private ItemDao itemDao;
 	
+	
+	
+	
+	
+	@RequestMapping(value="/item/detail.html")
+	public ModelAndView detail(String CODE, HttpSession session) { //세션에서 계정을 찾아봐야하기 때문에 session필요
+		ModelAndView mav = new ModelAndView("index");
+		Item item = this.itemDao.getItem(CODE); //CODE에 있는 상품코드로 상품을 검색한다
+		
+		
+		//둘의 차이는
+		mav.addObject("ITEM", item); //==> form일때는 파라미터 타입이라 이름이 필요함
+		//mav.addObject(item); // ==> form:form은 객체 주입이라 이름이 필요없음
+		
+		LoginUser user = (LoginUser)session.getAttribute("loginUser");
+		if(user != null && user.getId().equals("admin")) { //관리자인 경우
+			List<Nation> nationList = this.itemDao.getNation(); //원산지 목록을 검색
+			mav.addObject("BODY", "itemDetailAdmin.jsp");
+			mav.addObject("NATIONS", nationList);
+		} else { //관리자가 아닌 경우
+			mav.addObject("BODY", "itemDetail.jsp");
+		}
+		return mav;
+	} //관리자(admin)로 로그인한 경우에는 상품상세정보 화면에 수정,삭제 버튼이 있어야함
 	
 	@RequestMapping(value="/item/itemList.html")
 	public ModelAndView itemList(Integer PAGE_NUM) { //itemList.jsp에서 페이지번호를 클릭했을때 넘어오는 값을 매개변수로 받음

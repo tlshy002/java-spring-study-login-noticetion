@@ -8,6 +8,8 @@ import model.StartEnd;
 
 
 public interface ItemDao {
+	Item getItem(String code); //상품코드로 상품 검색
+	
 	Integer getTotalItems(); //전체 상품 개수 검색
 	List<Item> getItems(StartEnd se); //상품목록 검색
 	
