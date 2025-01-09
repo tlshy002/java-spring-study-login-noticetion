@@ -26,7 +26,7 @@
 			<td>${item.reg_date }</td>
 		<c:if test="${ sessionScope.loginUser != null || sessionScope.loginUser.id =='admin' }">
 			<td><a href="#" 
-			onclick="window.open('addCart.do?CODE=${item.item_code }','_blank_','width=450,height=200,top=200,left=200')">장바구니 담기</a></td>
+			onclick="window.open('../cart/addCart.html?CODE=${item.item_code }','_blank_','width=450,height=200,top=200,left=200')">장바구니 담기</a></td>
 		</c:if>
 		</tr>
 	</c:forEach>	
@@ -40,7 +40,7 @@
 	<c:set var="endPage" value="${pageCount}"/>
 </c:if>
 <c:if test="${startPage > 10}">
-	<a href="itemsList.do?PAGE_NUM=${startPage - 1}">[이전]</a>
+	<a href="../item/itemList.html?PAGE_NUM=${startPage - 1}">[이전]</a>
 </c:if>
 <c:forEach begin="${startPage}" end="${endPage}" var="i">
 	<c:if test="${currentPage == i}"><font size="6"></c:if>

@@ -97,6 +97,7 @@ public class NoticeController {
 		int pageCount = totalCount / 5;
 		if(totalCount % 5 != 0) pageCount++;
 		ModelAndView mav = new ModelAndView("index");
+		mav.addObject("currentPage",currentPage);
 		mav.addObject("PAGES", pageCount);
 		mav.addObject("BODY","noticeList.jsp");
 		mav.addObject("NOTICES",noticeList);//검색 결과를 저장한다.

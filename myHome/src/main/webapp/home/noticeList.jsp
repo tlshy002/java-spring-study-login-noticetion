@@ -20,9 +20,25 @@
 			<td>${dto.write_date }</td><td>${dto.writer }</td></tr>
 	</c:forEach>
 </table>
-<c:forEach begin="1" end="${pageCount}" var="i">
-	<a href="noticeList.do?PAGE_NUM=${ i }">${ i }</a>
+<c:set var="currentPage" value="${ currentPage}" />
+<c:set var="startPage"
+	value="${currentPage - (currentPage % 10 == 0 ? 10 :(currentPage % 10)) + 1 }" />
+<c:set var="endPage" value="${startPage + 9}"/>	
+<c:set var="pageCount" value="${PAGES }"/>
+<c:if test="${endPage > pageCount }">
+	<c:set var="endPage" value="${pageCount }" />
+</c:if>
+<c:if test="${startPage > 10 }">
+	<a href="../notice/list.html?PAGE_NUM=${startPage - 1 }">[이전]</a>
+</c:if>
+<c:forEach begin="${startPage }" end="${endPage }" var="i">
+	<c:if test="${currentPage == i }"><font size="6"></c:if>
+		<a href="../notice/list.html?PAGE_NUM=${ i }">${ i }</a>
+	<c:if test="${currentPage == i }"></font></c:if>
 </c:forEach>
+<c:if test="${endPage < pageCount }">
+	<a href="../notice/list.html?PAGE_NUM=${endPage + 1 }">[다음]</a>
+</c:if>
 </div>
 </body>
 </html>
