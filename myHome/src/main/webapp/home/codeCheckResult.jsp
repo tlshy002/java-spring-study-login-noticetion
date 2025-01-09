@@ -9,7 +9,7 @@
 </head>
 <body>
 <h3 align="center">상품 코드 중복 검사 결과</h3>
-<form action="codeCheck.do" name="frm">
+<form action="../item/codecheck.html" name="frm">
 	상품 코드 : <input type="text" name="CODE" value="${CODE }"/>
 	<input type="submit" value="중복 검사"/>
 </form><br/>
@@ -25,9 +25,9 @@
 function codeOk(){
 	//팝업창 폼(codeCheckResult.jsp)에 입력된 상품코드를 상품등록폼(inputItems.jsp)로 이동시킨다.
 	//즉, 자식JSP에서 부모JSP로 데이터 전송
-	opener.document.fm.CODE.value = document.frm.CODE.value;
-	opener.document.fm.CODE.readOnly = true;
-	opener.document.fm.codeCheck.value = "YES";//중복검사용 파라미터에 값을 넣는다.
+	opener.document.itemFrm.item_code.value = document.frm.CODE.value;
+	opener.document.itemFrm.item_code.readOnly = true;
+	opener.document.itemFrm.codeChecked.value = "YES";//중복검사용 파라미터에 값을 넣는다. => 중복검사 했는지 안했는지 확인용 값할당
 	self.close();//팝업창을 닫는다.
 }
 </script>

@@ -2,8 +2,12 @@ package controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -15,6 +19,21 @@ import model.Nation;
 public class ItemController {
 	@Autowired
 	private ItemDao itemDao;
+	
+	@RequestMapping(value="/item/register.html")
+	public ModelAndView register(@Valid Item item, BindingResult br, HttpSession session) {
+		ModelAndView mav = new ModelAndView("index");
+		if(br.hasErrors()) {
+			mav.addObject("BODY", "input_item.jsp");
+			List<Nation> nationList = this.itemDao.getNation(); //원산지 목록을 검색
+			mav.addObject("NATIONS", nationList);
+			mav.getModel().putAll(br.getModel());
+			return mav;
+		}
+		this.itemDao.putItem(item); //상품테이블에 insert
+		mav.addObject("BODY","putItemsResult.jsp");
+		return mav;
+	}
 	
 	@RequestMapping(value="/item/codecheck.html")
 	public ModelAndView codecheck(String CODE) {
