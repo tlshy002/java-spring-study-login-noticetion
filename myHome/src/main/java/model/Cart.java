@@ -47,6 +47,27 @@ public class Cart {
 		this.numList.add(index, num);
 	}
 	
+	
+	public void modifyItem(String code, String id, Integer num) {
+		for(int i=0; i<codeList.size(); i++) {
+			if(codeList.get(i).equals(code)) {
+				numList.set(i, num); //i번째 상품의 개수를 num으로 수정
+				return; //메서드 종료
+			}
+		}
+	}//장바구니에서 상품을 수정하는 메서드
+	
+	public void deleteItem(String code, String id) {
+		for(int i=0; i<codeList.size(); i++) {
+			if(codeList.get(i).equals(code)) {//입력된 상품코드와 i번째 상품코드가 같은경우
+				codeList.remove(i); //i번째 상품코드를 삭제
+				numList.remove(i); //i번째 상품의 개수를 삭제
+				return; //메서드 종료
+			}
+		}
+	}//장바구니에서 상품을 삭제하는 메서드
+	
+	
 	public void addCart(String code, Integer num) { //상품번호와 개수를 codeList와 numList에 저장하는 메서드
 		//code를 codeList에 넣고, num을 numList에 넣는다. 
 		//근데 넣기전에, 중복 검사하고 넣어야함

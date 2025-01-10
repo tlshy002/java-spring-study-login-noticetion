@@ -21,6 +21,20 @@ public class CartController {
 	private ItemDao itemDao;
 
 	
+	
+	@RequestMapping(value="/cart/modify.html") //세션에서 장바구니를 찾아야 하기 때문에 세션필요
+	public ModelAndView modify(String CODE, Integer NUM, String BTN, HttpSession session) {
+		Cart cart = (Cart)session.getAttribute("CART");
+		LoginUser user = (LoginUser)session.getAttribute("loginUser");
+		
+		if(BTN.equals("삭제")) {
+			cart.deleteItem(CODE, user.getId()); //장바구니에서 삭제
+		} else if(BTN.equals("수정")) {
+			cart.modifyItem(CODE, user.getId(), NUM); //장바구니에서 수정
+		}
+		return new ModelAndView("redirect:/cart/show.html");
+	}
+	
 	@RequestMapping(value="/cart/show.html")
 	public ModelAndView show(HttpSession session) {
 		LoginUser user = (LoginUser)session.getAttribute("loginUser"); //세션에서 계정을 찾음

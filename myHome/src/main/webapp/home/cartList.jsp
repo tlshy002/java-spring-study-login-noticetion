@@ -23,7 +23,7 @@
 	<tr><th>상품코드</th><th>상품이름</th><th>가 격</th><th>상품갯수</th><th>소 계</th>
 		<th>수정/삭제</th></tr>
 		<c:forEach var="item" items="${CARTLIST}">
-			<form action="cartModify.do" method="post" onsubmit="return check()">
+			<form action="../cart/modify.html" method="post" onsubmit="return check()">
 			<input type="hidden" name="CODE" value="${item.item_code}"/>
 			<tr><td>${item.item_code}</td><td>${item.item_title }</td>
 				<td>${item.price }원</td>
