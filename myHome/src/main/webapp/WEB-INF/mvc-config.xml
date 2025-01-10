@@ -23,6 +23,11 @@
 	<!-- @어노테이션으로 자동주입이 필요한 클래스가 있는 패키지 이름 작성 -->
 	<context:component-scan base-package="controller, dao, model"></context:component-scan>
 	
+	<!-- 스프링객체를 이용한 파일 업로드 설정 -->
+	<bean id="multipartResolver" 
+	class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+		p:maxInMemorySize="5242880"
+		p:maxUploadSize="5242880"></bean> <!-- 최대 파일크기와 업로드 사이즈 5MB -->
 	
 	
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

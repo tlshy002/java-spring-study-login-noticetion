@@ -1,23 +1,35 @@
 package controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import dao.CartDao;
 import dao.UserDao;
+import model.Cart;
+import model.CartItem;
 import model.LoginUser;
 
 @Controller
+@Scope("session") //세션 갱신
 public class LoginController {
 	@Autowired
 	private UserDao userDao;
+	@Autowired
+	private CartDao cartDao;
+	@Autowired
+	private Cart cart;
+	
 	
 	@RequestMapping(value="/login/loginDo.html", method=RequestMethod.POST)
 	public ModelAndView loginDo(@Valid LoginUser loginUser, BindingResult br, HttpSession session) {
@@ -33,6 +45,20 @@ public class LoginController {
 			mav.addObject("FAIL", "YES");
 		} else { //로그인 성공
 			session.setAttribute("loginUser", user);
+			
+			//**DB에서 계정으로 장바구니 검색하기 시작
+			List<CartItem> cartList = this.cartDao.selectCart(user.getId()); //로그인한 계정으로 장바구니 테이블 검색
+			if(cartList.size() > 0) { //장바구니에 데이터가 존재하는 경우
+				Cart cart = this.cart; //생성된 장바구니를 주입함
+				cart.setId(user.getId()); //장바구니의 주인(계정) 설정
+				
+				for(int i=0; i<cartList.size(); i++) { //장바구니에 있는 상품의 수만큼 반복
+					CartItem ci = cartList.get(i); //i번째 상품정보를 검색
+					cart.setCodeList(i, ci.getItem_code()); //장바구니의 codeList에 상품코드 삽입
+					cart.setNumList(i, ci.getNum()); //장바구니의 NumList에 상품개수 삽입
+				}
+				session.setAttribute("CART", cart); //장바구니를 세션에 저장
+			}//**DB에서 계정으로 장바구니 검색하기 끝
 		}
 		return mav;
 	}

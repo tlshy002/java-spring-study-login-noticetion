@@ -22,8 +22,7 @@ import model.LoginUser;
 public class CartController {
 	@Autowired
 	private ItemDao itemDao;
-	@Autowired
-	private CartDao cartDao;
+
 	@Autowired
 	private Cart cart;
 
