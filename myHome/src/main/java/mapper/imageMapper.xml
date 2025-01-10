@@ -3,10 +3,16 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="imageMapper">
 
+
+<select id="getImageDetail" parameterType="Integer" resultType="model.ImageBBS">
+		select w_id, group_id, parent_id, order_no, 
+			title, writer, to_char(w_date,'YYYY/MM/DD HH24:MI:SS') as w_date,
+			imagename, content, password from imagebbs_tbl where w_id = #{id}	
+</select>
+
 <select id="getTotal" resultType="Integer">
 		select count(*) from imagebbs_tbl
 </select>
-
 <select id="imageList" parameterType="model.StartEnd" resultType="model.Imagebbs">
 		select w_id, title, writer, w_date, imagename
 		from (select rownum rank, a.*

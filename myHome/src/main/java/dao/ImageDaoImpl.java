@@ -15,6 +15,12 @@ public class ImageDaoImpl implements ImageDao {
 	private SqlSession sqlSession;
 
 	
+	
+	@Override
+	public Imagebbs getImageDetail(Integer id) {
+		return this.sqlSession.selectOne("imageMapper.getImageDetail", id);
+	}
+
 	@Override
 	public Integer getTotal() {
 		return this.sqlSession.selectOne("imageMapper.getTotal");

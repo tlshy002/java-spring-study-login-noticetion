@@ -31,6 +31,25 @@ public class ImageController {
 	private ImageDao imageDao;
 
 	
+	@RequestMapping(value="/image/readImage.html")
+	public ModelAndView readImage(Integer ID, HttpSession session) { //게시글 작성자인지에 따라 다르게 보여주기위해 세션필요
+		LoginUser user = (LoginUser)session.getAttribute("loginUser");
+		ModelAndView mav = new ModelAndView("index");
+		Imagebbs imagebbs = this.imageDao.getImageDetail(ID); //글번호로 이미지게시글 검색
+		
+		if(user == null) { //로그인 안한 경우
+			mav.addObject("BODY", "imageDetail.jsp");
+		} else { //로그인 한 경우
+			if(user.getId().equals(imagebbs.getWriter())) { //작성자인 경우
+				mav.addObject("BODY", "imageDetailOwner.jsp");
+			} else { //작성자가 아닌 경우
+				mav.addObject("BODY", "imageDetailReply.jsp");
+			}
+		}
+		mav.addObject("", imagebbs);
+		return mav;
+	}
+	
 	@RequestMapping(value="/image/imageList.html")
 	public ModelAndView imageList(Integer PAGE_NUM) {
 		int currentPage = 1;

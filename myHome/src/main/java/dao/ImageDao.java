@@ -10,4 +10,5 @@ public interface ImageDao {
 	void putImagebbs(Imagebbs bbs); //이미지 게시글 insert
 	List<Imagebbs> imageList(StartEnd st); //이미지 게시글의 목록을 검색
 	Integer getTotal(); //이미지 게시글의 개수 검색
+	Imagebbs getImageDetail(Integer id); //글번호로 이미지 검색
 }

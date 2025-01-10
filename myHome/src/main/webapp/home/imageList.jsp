@@ -21,7 +21,7 @@
 		<tr><td><img alt="" src="${pageContext.request.contextPath}/upload/${dto.imagename }" width="50" 
 					height="50"/></td>
 			<td>${dto.w_id }</td>
-			<td><a href="imageDetail.do?ID=${dto.w_id }">${dto.title }</a></td>
+			<td><a href="../image/readImage.html?ID=${dto.w_id }">${dto.title }</a></td>
 			<td>${dto.writer }</td><td>${dto.w_date }</td></tr>
 	</c:forEach>
 </table>
