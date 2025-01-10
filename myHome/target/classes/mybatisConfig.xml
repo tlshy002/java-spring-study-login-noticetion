@@ -8,5 +8,6 @@
 		<mapper resource="mapper/noticeMapper.xml" />
 		<mapper resource="mapper/checkMapper.xml" />
 		<mapper resource="mapper/itemMapper.xml" />
+		<mapper resource="mapper/cartMapper.xml" />
 	</mappers>
 </configuration>

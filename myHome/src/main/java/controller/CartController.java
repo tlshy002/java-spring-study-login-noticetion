@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import dao.CartDao;
 import dao.ItemDao;
 import model.Cart;
 import model.CartItem;
@@ -16,9 +18,14 @@ import model.Item;
 import model.LoginUser;
 
 @Controller
+@Scope("session")
 public class CartController {
 	@Autowired
 	private ItemDao itemDao;
+	@Autowired
+	private CartDao cartDao;
+	@Autowired
+	private Cart cart;
 
 	
 	
@@ -85,7 +92,7 @@ public class CartController {
 			ModelAndView mav = new ModelAndView("addCartResult");
 			Cart cart = (Cart)session.getAttribute("CART"); //세션에서 장바구니(Cart)를 찾음
 			
-			if(cart == null) cart = new Cart(); //세션에 장바구니가 없으면 생성함
+			if(cart == null) cart = this.cart; //세션에 장바구니가 없으면, 생성된 장바구니를 주입함 (@Autowired한 Cart)
 			cart.setId(user.getId()); //장바구니에 계정을 설정
 			cart.addCart(CODE, 1); //장바구니에 상품번호를  codeList에, 1을 numList에 저장하기
 			mav.addObject("CODE", CODE);

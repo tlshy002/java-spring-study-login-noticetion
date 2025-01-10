@@ -2,7 +2,18 @@ package model;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
+
+import dao.CartDao;
+
+@Service
+@Scope("session")
 public class Cart {
+	@Autowired
+	private CartDao cartDao;
+	
 	private String id; //장바구니의 주인 => 계정
 	private String code; //상품 번호
 	private Integer num; //상품 개수
@@ -52,6 +63,13 @@ public class Cart {
 		for(int i=0; i<codeList.size(); i++) {
 			if(codeList.get(i).equals(code)) {
 				numList.set(i, num); //i번째 상품의 개수를 num으로 수정
+				/// DB연동 시작 /// --> 장바구니에 담는족족 DB에 반영됨
+				CartItem ci = new CartItem();
+				ci.setId(id);
+				ci.setItem_code(code);
+				ci.setNum(num);
+				this.cartDao.updateCart(ci); //update
+				/// DB연동 끝 ///
 				return; //메서드 종료
 			}
 		}
@@ -62,6 +80,12 @@ public class Cart {
 			if(codeList.get(i).equals(code)) {//입력된 상품코드와 i번째 상품코드가 같은경우
 				codeList.remove(i); //i번째 상품코드를 삭제
 				numList.remove(i); //i번째 상품의 개수를 삭제
+				/// DB연동 시작 ///
+				CartItem ci = new CartItem();
+				ci.setId(id);
+				ci.setItem_code(code);
+				this.cartDao.deleteCart(ci); //delete
+				/// DB연동 끝 ///
 				return; //메서드 종료
 			}
 		}
@@ -77,9 +101,27 @@ public class Cart {
 				int number = numList.get(i); //i번째 상품의 개수를 찾음
 				number = number + num; //상품개수 증가
 				numList.set(i, number); //i번째 상품의 개수를 number의 개수로 변경함
+				// 똑같은 상품이 있을때 개수를 바꿔주기 때문에 update
+				/// DB연동 시작 ///
+				CartItem ci = new CartItem();
+				ci.setId(id);
+				ci.setItem_code(code);
+				ci.setNum(num);
+				this.cartDao.updateCart(ci); //DB에 update
+				/// DB연동 끝 ///
 				return; //메서드 종료
 			}
 		}
 		codeList.add(code); numList.add(num); //장바구니에 없는 상품이면 새로 추가하기
+		// 새로운 상품 추가이므로 insert
+		/// DB연동 시작 ///
+		CartItem ci = new CartItem();
+		ci.setId(id);
+		ci.setItem_code(code);
+		ci.setNum(num);
+		if(this.cartDao == null) System.out.println("cartDao is null");
+		else System.out.println("cartDao IS NOt Null");
+		this.cartDao.insertCart(ci); //DB에 insert
+		/// DB연동 끝 ///
 	}
 }
