@@ -3,6 +3,7 @@ package controller;
 import java.io.BufferedInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import dao.ImageDao;
 import model.Imagebbs;
 import model.LoginUser;
+import model.StartEnd;
 import utils.FileValidator;
 
 @Controller
@@ -28,6 +30,38 @@ public class ImageController {
 	@Autowired
 	private ImageDao imageDao;
 
+	
+	@RequestMapping(value="/image/imageList.html")
+	public ModelAndView imageList(Integer PAGE_NUM) {
+		int currentPage = 1;
+		if(PAGE_NUM != null) currentPage = PAGE_NUM;
+		int count = this.imageDao.getTotal(); //이미지 게시글의 개수를 검색
+		int startRow = 0;
+		int endRow = 0;
+		int totalPageCount = 0;
+		
+		if(count > 0) {
+			totalPageCount = count / 5;
+			if(count % 5 != 0) totalPageCount++;
+			startRow = (currentPage - 1) * 5;
+			endRow = ((currentPage - 1) * 5 ) + 6;
+			if(endRow > count) endRow = count;
+		}
+		StartEnd se = new StartEnd();
+		se.setStart(startRow);
+		se.setEnd(endRow);
+		List<Imagebbs> imageList = this.imageDao.imageList(se); //DB에서 이미지 게시글을 5개 검색함
+		
+		ModelAndView mav = new ModelAndView("index");
+		mav.addObject("BODY", "imageList.jsp");
+		mav.addObject("START", startRow); //imageList.jsp의 EL매개변수와 매핑
+		mav.addObject("END", endRow);
+		mav.addObject("TOTAL", count);
+		mav.addObject("currentPage", currentPage);
+		mav.addObject("LIST", imageList);
+		mav.addObject("pageCount", totalPageCount);
+		return mav;
+	}
 	
 	@RequestMapping(value="/image/write.html") //@Valid를 통해 어노테이션 폼체크를 함
 	public ModelAndView write(@Valid @ModelAttribute("bbsimage") Imagebbs imagebbs,

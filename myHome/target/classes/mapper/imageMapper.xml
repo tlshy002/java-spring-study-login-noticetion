@@ -3,6 +3,22 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="imageMapper">
 
+<select id="getTotal" resultType="Integer">
+		select count(*) from imagebbs_tbl
+</select>
+
+<select id="imageList" parameterType="model.StartEnd" resultType="model.Imagebbs">
+		select w_id, title, writer, w_date, imagename
+		from (select rownum rank, a.*
+		        from(
+		        	select w_id, title, writer, 
+			     	to_char(w_date,'YYYY/MM/DD HH24:MI:SS') "W_DATE", imagename
+			     	from imagebbs_tbl 
+			     	order by group_id desc, order_no asc
+			     	) a)
+		where rank > #{start} and rank <![CDATA[<]]> #{end}	
+</select>
+
 <select id="getMaxWid" resultType="Integer">
 	select max(w_id) from imagebbs_tbl
 </select>
