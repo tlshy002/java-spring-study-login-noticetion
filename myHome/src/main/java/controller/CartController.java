@@ -1,16 +1,24 @@
 package controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import dao.ItemDao;
 import model.Cart;
+import model.CartItem;
+import model.Item;
 import model.LoginUser;
 
 @Controller
 public class CartController {
+	@Autowired
+	private ItemDao itemDao;
 
 	
 	@RequestMapping(value="/cart/show.html")
@@ -20,8 +28,32 @@ public class CartController {
 		ModelAndView mav = new ModelAndView("index"); 
 		
 		if(cart != null) { //장바구니가 세션에 존재하는 경우
+			int totalAmount = 0; //장바구니가 세션에 존재하는 경우
+			ArrayList<String> codeList = cart.getCodeList(); //장바구니에서 codeList를 가져옴
+			ArrayList<Integer> numList = cart.getNumList(); //장바구니에서 numList를 가져옴
+			ArrayList<CartItem> cartItemList = new ArrayList<CartItem>();
+			for(int i=0; i<codeList.size(); i++) {
+				String code = codeList.get(i); //i번째 상품코드를 가져옴
+				
+				Item item = this.itemDao.getItem(code); //상품번호로 해당 상품을 DB조회 -> 조회결과를 CartItem에 저장
+				CartItem ci = new CartItem(); //CartItem생성
+				
+				ci.setItem_code(item.getItem_code());
+				ci.setItem_title(item.getItem_title());
+				ci.setMadein(item.getMadein());
+				ci.setPrice(item.getPrice()); //Item의 가격 -> CartItem의 가격으로 할당
+				ci.setReg_date(item.getReg_date());
+				
+				ci.setNum(numList.get(i)); //i번째 상품의 개수를 CartItem에 설정
+				ci.setSum(ci.getPrice() * ci.getNum()); //소계를 계산함
+				totalAmount += (ci.getPrice() * ci.getNum()); //총액을 누적
+				ci.setId(user.getId()); //계정을 cartItem에 설정
+				cartItemList.add(ci); //CartItem을 ArrayList에 저장
+			}
+			mav.addObject("TOTAL", totalAmount); //주문총액을 ModelAndView에 저장
+			mav.addObject("CARTLIST", cartItemList); //CartItem이 저장된 ArrayList를 mav에 저장
 			
-		} else { //장바귄가 세션에 없는 경우
+		} else { //장바구니가 세션에 없는 경우
 			mav.addObject("CARTLIST", null);
 		}
 		mav.addObject("BODY", "cartList.jsp");

@@ -7,6 +7,9 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
+<style type="text/css">
+.num { width: 40px; }
+</style>
 </head>
 <body>
 <div align="center">
@@ -24,7 +27,7 @@
 			<input type="hidden" name="CODE" value="${item.item_code}"/>
 			<tr><td>${item.item_code}</td><td>${item.item_title }</td>
 				<td>${item.price }원</td>
-				<td><input type="number" name="NUM" min="0" value="${item.num }"></td>
+				<td><input type="number" name="NUM" min="0" value="${item.num }" class="num"></td>
 				<td>${item.sum }</td><td><input type="submit" value="수정" name="BTN"/>
 					<input type="submit" value="삭제" name="BTN"/></td></tr>
 			</form>
