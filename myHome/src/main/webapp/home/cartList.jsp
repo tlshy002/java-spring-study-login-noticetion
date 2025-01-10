@@ -2,6 +2,7 @@
     pageEncoding="EUC-KR"%>
 <%@ page import="java.util.*, model.*" %>    
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,9 +27,11 @@
 			<form action="../cart/modify.html" method="post" onsubmit="return check()">
 			<input type="hidden" name="CODE" value="${item.item_code}"/>
 			<tr><td>${item.item_code}</td><td>${item.item_title }</td>
-				<td>${item.price }원</td>
+				
+				<td><fmt:formatNumber value="${item.price }" groupingUsed="true"/> 원</td>
 				<td><input type="number" name="NUM" min="0" value="${item.num }" class="num"></td>
-				<td>${item.sum }</td><td><input type="submit" value="수정" name="BTN"/>
+				<td><fmt:formatNumber value="${item.sum }" groupingUsed="true"/> 원</td>
+				<td><input type="submit" value="수정" name="BTN"/>
 					<input type="submit" value="삭제" name="BTN"/></td></tr>
 			</form>
 		</c:forEach>
@@ -42,7 +45,8 @@ function check(){
 </script>
 
 <form action="">
-	총 계 : ${TOTAL }원 <input type="submit" value="결제하기"/>
+	총 계 : <fmt:formatNumber value="${TOTAL }" groupingUsed="true"/> 원 
+	<input type="submit" value="결제하기"/>
 </form>
  
 </div>
