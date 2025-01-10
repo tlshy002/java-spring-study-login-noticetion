@@ -7,7 +7,7 @@ public class Imagebbs {
 	private Integer w_id; //글번호 자동증가
 	private Integer group_id;
 	private Integer parent_id;
-	private Integer order_id;
+	private Integer order_no;
 	@NotEmpty(message="제목을 입력하세요.")
 	private String title;
 	@NotEmpty(message="내용을 입력하세요.")
@@ -37,11 +37,11 @@ public class Imagebbs {
 	public void setParent_id(Integer parent_id) {
 		this.parent_id = parent_id;
 	}
-	public Integer getOrder_id() {
-		return order_id;
+	public Integer getOrder_no() {
+		return order_no;
 	}
-	public void setOrder_id(Integer order_id) {
-		this.order_id = order_id;
+	public void setOrder_no(Integer order_no) {
+		this.order_no = order_no;
 	}
 	public String getTitle() {
 		return title;

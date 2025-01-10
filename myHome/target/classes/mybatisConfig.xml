@@ -9,5 +9,6 @@
 		<mapper resource="mapper/checkMapper.xml" />
 		<mapper resource="mapper/itemMapper.xml" />
 		<mapper resource="mapper/cartMapper.xml" />
+		<mapper resource="mapper/imageMapper.xml" />
 	</mappers>
 </configuration>

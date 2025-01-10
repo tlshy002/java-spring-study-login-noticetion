@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="imageMapper">
+
+<select id="getMaxWid" resultType="Integer">
+	select max(w_id) from imagebbs_tbl
+</select>
+<insert id="putImagebbs" parameterType="model.Imagebbs">
+	insert into imagebbs_tbl values(#{w_id},#{group_id},#{parent_id},#{order_no},
+		#{title},#{content},#{writer},sysdate,#{imagename},#{password})
+</insert>	
+	
+</mapper>
