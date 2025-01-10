@@ -4,7 +4,7 @@
 <mapper namespace="cartMapper">
 
 	
-	<select id="selectCart" parameterType="String">
+	<select id="selectCart" parameterType="String" resultType="model.CartItem">
 		select code item_code, num from cart_tbl where id=#{id}
 	</select>	
 	<update id="updateCart" parameterType="model.CartItem">
