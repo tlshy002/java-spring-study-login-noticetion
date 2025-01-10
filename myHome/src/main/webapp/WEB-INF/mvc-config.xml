@@ -29,6 +29,19 @@
 		p:maxInMemorySize="5242880"
 		p:maxUploadSize="5242880"></bean> <!-- 최대 파일크기와 업로드 사이즈 5MB -->
 	
+	<!-- 에러메세지를 담은 프로퍼티즈파일을 사용하는 설정 -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>message</value> <!-- 프로퍼티즈파일의 이름 -->
+			</list>
+		</property>
+	</bean>
+	
+	<!-- FileValidator 주입 -->
+	<bean id="fileValidator" class="utils.FileValidator"></bean>
+	
 	
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 	        <!-- Example: a logical view name of 'showMessage' is mapped to '/WEB-INF/jsp/showMessage.jsp' -->

@@ -11,7 +11,7 @@
 </head>
 <body>
 	<h3 align="center">이미지 게시글 작성</h3>
-	<form:form action="" method="post" enctype="multipart/form-data"
+	<form:form action="../image/write.html" method="post" enctype="multipart/form-data"
 			modelAttribute="bbsimage">
 	<table>
 		<tr><th>제 목</th><td><form:input path="title"/>
