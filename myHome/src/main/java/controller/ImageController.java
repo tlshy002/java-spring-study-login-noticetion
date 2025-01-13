@@ -31,6 +31,16 @@ public class ImageController {
 	private ImageDao imageDao;
 
 	
+	@RequestMapping(value="/image/delete.html")
+	public ModelAndView delete(Integer id) {
+		ModelAndView mav = new ModelAndView("index");
+		Imagebbs imagebbs = this.imageDao.getImageDetail(id); //글번호로 이미지 게시글 조회
+		mav.addObject(imagebbs); //조회된 결과 주입
+		mav.addObject("BODY", "imageDeleteForm.jsp"); //form:form JSP
+		
+		return mav;
+	}
+	
 	@RequestMapping(value="/image/readImage.html")
 	public ModelAndView readImage(Integer ID, HttpSession session) { //게시글 작성자인지에 따라 다르게 보여주기위해 세션필요
 		LoginUser user = (LoginUser)session.getAttribute("loginUser");
@@ -46,7 +56,7 @@ public class ImageController {
 				mav.addObject("BODY", "imageDetailReply.jsp");
 			}
 		}
-		mav.addObject("", imagebbs);
+		mav.addObject("IMAGE", imagebbs);
 		return mav;
 	}
 	

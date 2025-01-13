@@ -4,7 +4,7 @@
 <mapper namespace="imageMapper">
 
 
-<select id="getImageDetail" parameterType="Integer" resultType="model.ImageBBS">
+<select id="getImageDetail" parameterType="Integer" resultType="model.Imagebbs">
 		select w_id, group_id, parent_id, order_no, 
 			title, writer, to_char(w_date,'YYYY/MM/DD HH24:MI:SS') as w_date,
 			imagename, content, password from imagebbs_tbl where w_id = #{id}	
