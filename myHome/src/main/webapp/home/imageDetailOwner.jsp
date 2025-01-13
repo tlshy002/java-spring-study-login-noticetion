@@ -36,7 +36,7 @@ function goReply(){
 	document.frm.submit();
 }
 function goModify(){
-	document.frm.action = "imageModify.do";
+	document.frm.action = "../image/modify.html";
 	document.frm.submit();//º≠∫Ì∏¥ »£√‚
 }
 function goDelete(){

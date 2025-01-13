@@ -4,6 +4,19 @@
 <mapper namespace="imageMapper">
 
 
+<update id="updateImageBBS" parameterType="model.Imagebbs">
+		update imagebbs_tbl set title=#{title}, 
+		content=#{content}, imagename=#{imagename} 
+		where w_id=#{w_id}
+</update>
+<delete id="deleteImageBBS" parameterType="Integer">
+	delete from imagebbs_tbl where w_id = #{id}
+</delete>
+
+<select id="getReplyCount" parameterType="Integer" resultType="Integer">
+	select count(*) from imagebbs_tbl where parent_id = #{id}
+</select>
+
 <select id="getImageDetail" parameterType="Integer" resultType="model.Imagebbs">
 		select w_id, group_id, parent_id, order_no, 
 			title, writer, to_char(w_date,'YYYY/MM/DD HH24:MI:SS') as w_date,

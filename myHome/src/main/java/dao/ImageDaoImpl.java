@@ -15,7 +15,21 @@ public class ImageDaoImpl implements ImageDao {
 	private SqlSession sqlSession;
 
 	
-	
+	@Override
+	public void updateImageBBS(Imagebbs bbs) {
+		this.sqlSession.update("imageMapper.updateImageBBS", bbs);
+	}
+
+	@Override
+	public void deleteImageBBS(Integer id) {
+		this.sqlSession.delete("imageMapper.deleteImageBBS", id);
+	}
+
+	@Override
+	public Integer getReplyCount(Integer id) {
+		return this.sqlSession.selectOne("imageMapper.getReplyCount", id);
+	}
+
 	@Override
 	public Imagebbs getImageDetail(Integer id) {
 		return this.sqlSession.selectOne("imageMapper.getImageDetail", id);

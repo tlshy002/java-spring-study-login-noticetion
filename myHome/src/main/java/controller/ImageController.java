@@ -31,6 +31,21 @@ public class ImageController {
 	private ImageDao imageDao;
 
 	
+	@RequestMapping(value="/image/deleteDo.html")
+	public ModelAndView deleteDo(Imagebbs imagebbs) {
+		
+		//글번호로 답글이 있는 게시글인지 검색하기(쿼리문)
+		int replyCount = this.imageDao.getReplyCount(imagebbs.getW_id());
+		ModelAndView mav = new ModelAndView("index");
+		if(replyCount > 0) { //답글있는 글이면, 삭제불가
+			mav.addObject("BODY", "imageDeleteResult.jsp?R=NO");
+		} else { //답글없는글, 삭제가능
+			this.imageDao.deleteImageBBS(imagebbs.getW_id()); //DB에서 해당 글번호인 게시글 삭제
+			mav.addObject("BODY", "imageDeleteResult.jsp");
+		}
+		return mav;
+	}
+	
 	@RequestMapping(value="/image/delete.html")
 	public ModelAndView delete(Integer id) {
 		ModelAndView mav = new ModelAndView("index");
