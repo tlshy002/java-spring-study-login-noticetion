@@ -12,7 +12,7 @@
 </head>
 <body>
 <div align="center">
-<form:form action="" method="post" enctype="multipart/form-data"
+<form:form action="../image/updateDo.html" method="post" enctype="multipart/form-data"
 	onsubmit="return check(this)" modelAttribute="imagebbs">
 <form:hidden path="w_id"/>
 <form:hidden path="password"/>

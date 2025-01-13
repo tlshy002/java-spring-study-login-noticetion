@@ -31,6 +31,43 @@ public class ImageController {
 	private ImageDao imageDao;
 
 	
+	@RequestMapping(value="/image/updateDo.html")
+	public ModelAndView updateDo(Imagebbs imagebbs, HttpSession session) { 
+		ModelAndView mav = new ModelAndView("index");
+		MultipartFile multiFile = imagebbs.getImage(); //선택한 파일을 불러옴
+		
+		if(! multiFile.getOriginalFilename().equals("")) { //파일이름이 존재하는 경우, 즉 이미지 변경
+			String fileName = null;
+			String path = null;
+			OutputStream os = null;
+			
+			fileName = multiFile.getOriginalFilename(); //이미지 파일의 이름 획득
+			ServletContext ctx = session.getServletContext(); //ServletContext 생성
+			path = ctx.getRealPath("/upload/"+fileName); //upload폴더의 절대경로를 얻음
+			System.out.println("변경된 이미지 경로:" + path);
+			
+			try {
+				os = new FileOutputStream(path); //upload폴더에 파일생성
+				BufferedInputStream bis = new BufferedInputStream(multiFile.getInputStream()); //선택한 파일을 연다
+				byte[] buffer = new byte[8156]; //8K 크기로 배열생성(한번에 8K씩 복사 진행)
+				int read = 0; //실제로 읽은 바이트 수
+				while((read = bis.read(buffer)) > 0) { //원본파일에서 읽은 바이트 수가 0이상인 동안 반복
+					os.write(buffer, 0, read); //원본파일에서 읽은 데이터를 upload폴더의 파일에 출력
+				}
+			} catch(Exception e) {
+				System.out.println("변경된 이미지 업로드 중 문제발생!");
+			} finally {
+				try {
+					if(os != null) os.close();
+				} catch (Exception e) {}
+			} //업로드종료
+			imagebbs.setImagename(fileName); //Imagebbs의 파일이름을 새 파일이름으로 설정
+		}
+		this.imageDao.updateImageBBS(imagebbs); //DB에서 이미지 게시글 수정
+		mav.addObject("BODY", "imageUpdateResult.jsp");
+		return mav;
+	}
+	
 	@RequestMapping(value="/image/modify.html")
 	public ModelAndView modify(Integer id) {
 		ModelAndView mav = new ModelAndView("index");
