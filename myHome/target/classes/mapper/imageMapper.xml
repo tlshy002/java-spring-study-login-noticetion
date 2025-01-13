@@ -5,9 +5,8 @@
 
 
 <update id="updateImageBBS" parameterType="model.Imagebbs">
-		update imagebbs_tbl set title=#{title}, 
-		content=#{content}, imagename=#{imagename} 
-		where w_id=#{w_id}
+		update imagebbs_tbl set title=#{title}, content=#{content}, imagename=#{imagename} 
+			where w_id=#{w_id}
 </update>
 <delete id="deleteImageBBS" parameterType="Integer">
 	delete from imagebbs_tbl where w_id = #{id}

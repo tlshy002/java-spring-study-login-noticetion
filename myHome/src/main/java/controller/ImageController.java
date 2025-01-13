@@ -31,6 +31,15 @@ public class ImageController {
 	private ImageDao imageDao;
 
 	
+	@RequestMapping(value="/image/modify.html")
+	public ModelAndView modify(Integer id) {
+		ModelAndView mav = new ModelAndView("index");
+		Imagebbs imagebbs = this.imageDao.getImageDetail(id);
+		mav.addObject(imagebbs);
+		mav.addObject("BODY", "imageUpdateForm.jsp");
+		return mav;
+	}
+	
 	@RequestMapping(value="/image/deleteDo.html")
 	public ModelAndView deleteDo(Imagebbs imagebbs) {
 		

@@ -37,11 +37,11 @@ function goReply(){
 }
 function goModify(){
 	document.frm.action = "../image/modify.html";
-	document.frm.submit();//º≠∫Ì∏¥ »£√‚
+	document.frm.submit();
 }
 function goDelete(){
 	document.frm.action = "../image/delete.html";
-	document.frm.submit();//º≠∫Ì∏¥ »£√‚
+	document.frm.submit();
 }
 </script>
 </body>
