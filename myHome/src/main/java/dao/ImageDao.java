@@ -15,4 +15,6 @@ public interface ImageDao {
 	
 	void updateImageBBS(Imagebbs bbs); //Imagebbs 게시글 수정
 	void deleteImageBBS(Integer id); //글번호로 게시글 삭제 
+	
+	void updateOrderNo(Imagebbs bbs); //답글의 순서번호를 수정
 }

@@ -14,7 +14,13 @@ public class ImageDaoImpl implements ImageDao {
 	@Autowired
 	private SqlSession sqlSession;
 
+
 	
+	@Override
+	public void updateOrderNo(Imagebbs bbs) {
+		this.sqlSession.update("imageMapper.updateOrderNo", bbs);
+	}
+
 	@Override
 	public void updateImageBBS(Imagebbs bbs) {
 		this.sqlSession.update("imageMapper.updateImageBBS", bbs);

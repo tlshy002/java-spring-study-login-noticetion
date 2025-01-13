@@ -3,6 +3,10 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="imageMapper">
 
+<update id="updateOrderNo" parameterType="model.Imagebbs">
+		update imagebbs_tbl set order_no = order_no + 1
+			where group_id = #{group_id} and order_no >= #{order_no}
+</update>
 
 <update id="updateImageBBS" parameterType="model.Imagebbs">
 		update imagebbs_tbl set title=#{title}, content=#{content}, imagename=#{imagename} 

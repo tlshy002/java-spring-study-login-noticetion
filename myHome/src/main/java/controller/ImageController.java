@@ -213,6 +213,7 @@ public class ImageController {
 			imagebbs.setOrder_no(0); //답글 순서 번호를 0으로 설정
 			imagebbs.setGroup_id(maxNum); //그룹번호를 글번호와 동일하게 설정
 		} else { //답글인 경우
+			this.imageDao.updateImageBBS(imagebbs);
 			
 		}
 		imagebbs.setW_id(maxNum); //글번호 설정
