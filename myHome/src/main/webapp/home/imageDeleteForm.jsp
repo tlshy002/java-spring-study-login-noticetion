@@ -15,7 +15,7 @@
 <h3>이미지 게시글 상세 보기</h3>
 <form:form action="../image/deleteDo.html" method="post" modelAttribute="imagebbs" 
 	onsubmit="return check(this)">
-<form:hidden path="w_id"  />
+
 <form:hidden path="password"/>
 <table>
 	<tr><th>제 목</th><td>

@@ -68,10 +68,16 @@ public class CartController {
 				ci.setSum(ci.getPrice() * ci.getNum()); //소계를 계산함
 				totalAmount += (ci.getPrice() * ci.getNum()); //총액을 누적
 				ci.setId(user.getId()); //계정을 cartItem에 설정
+				
 				cartItemList.add(ci); //CartItem을 ArrayList에 저장
 			}
 			mav.addObject("TOTAL", totalAmount); //주문총액을 ModelAndView에 저장
 			mav.addObject("CARTLIST", cartItemList); //CartItem이 저장된 ArrayList를 mav에 저장
+			
+			
+			//return mav;로 끝난후에는 저장되어있던 카트리스트가 없어지기 때문에
+			//Checkout컨트롤러에서 사용하기위한 카트리스트를 세션에 저장함(장바구니 목록)
+			session.setAttribute("CARTLIST", cartItemList); 
 			
 		} else { //장바구니가 세션에 없는 경우
 			mav.addObject("CARTLIST", null);

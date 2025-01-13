@@ -3,6 +3,7 @@
 <%@ page import="java.util.*, model.*" %>    
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,7 +45,8 @@ function check(){
 }
 </script>
 
-<form action="">
+<form action="../checkout/checkout.html">
+<input type="hidden" name="TOTAL" value="${TOTAL }"><!-- 컨트롤러로 값을 넘기기위한 파라미터 -->
 	총 계 : <fmt:formatNumber value="${TOTAL }" groupingUsed="true"/> 원 
 	<input type="submit" value="결제하기"/>
 </form>

@@ -4,14 +4,19 @@
 <mapper namespace="loginMapper">
 
 
+	<select id="getUserInfo" parameterType="String" resultType="model.User">
+		select user_id, name, addr, email from user_info 
+			where user_id = #{id}
+	</select>
+
+	<select id="getLoginUser" parameterType="model.LoginUser" resultType="model.LoginUser">
+		select user_id "id", user_pw "password" from user_info
+			where user_id = #{id} and user_pw = #{password}	
+	</select>
+
 	<insert id="putUser" parameterType="model.User">
 		insert into user_info values(#{user_id},#{user_pw},#{name},#{addr},#{phone},#{gender}, 
 			0,#{email},to_date(#{birth}, 'YYYY/MM/DD'), #{job})	
 	</insert>
-
-	<select id="getUser" parameterType="model.LoginUser" resultType="model.LoginUser">
-		select user_id "id", user_pw "password" from user_info
-		where user_id = #{id} and user_pw = #{password}	
-	</select>
 	
 </mapper>

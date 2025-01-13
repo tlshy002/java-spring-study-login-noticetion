@@ -12,9 +12,16 @@ public class UserDaoImpl implements UserDao {
 	@Autowired
 	private SqlSession sqlSession;
 
+	
+	
+	@Override
+	public User getUserInfo(String userId) {
+		return this.sqlSession.selectOne("loginMapper.getUserInfo", userId);
+	}
+
 	@Override
 	public LoginUser getLoginUser(LoginUser user) {
-		return this.sqlSession.selectOne("loginMapper.getUser", user);
+		return this.sqlSession.selectOne("loginMapper.getLoginUser", user);
 	}
 
 	@Override
