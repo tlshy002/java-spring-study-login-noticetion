@@ -31,6 +31,23 @@ public class ImageController {
 	private ImageDao imageDao;
 
 	
+	@RequestMapping(value="/image/imageReplyForm.html")
+	public ModelAndView replyform(Integer id,Integer parentid,Integer groupid) {
+		ModelAndView mav = new ModelAndView("index");
+		
+		Imagebbs imagebbs = this.imageDao.getImageDetail(id); //글번호로 게시글 조회
+		imagebbs.setContent(null);
+		imagebbs.setW_date(null);
+		imagebbs.setImagename(null);
+		imagebbs.setGroup_id(groupid);
+		imagebbs.setParent_id(parentid);
+		
+		mav.addObject("RE", "RE] "+imagebbs.getTitle()); //원글제목 앞에 RE] 붙이기
+		mav.addObject("BODY", "imageWriteForm.jsp"); //form:form
+		mav.addObject("bbsimage", imagebbs); //주입
+		return mav;
+	}
+	
 	@RequestMapping(value="/image/updateDo.html")
 	public ModelAndView updateDo(Imagebbs imagebbs, HttpSession session) { 
 		ModelAndView mav = new ModelAndView("index");

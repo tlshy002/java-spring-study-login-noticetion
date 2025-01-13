@@ -30,7 +30,7 @@
 </form>
 <script type="text/javascript">
 function goReply(){
-	document.move.action="imageForm.do";
+	document.move.action="../image/imageReplyForm.html";
 	document.move.submit();
 }
 </script>
