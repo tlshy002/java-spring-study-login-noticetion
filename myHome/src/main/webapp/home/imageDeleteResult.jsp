@@ -17,13 +17,13 @@
 			},100);
 		</script>
 	</c:when>
+	<c:otherwise>
 		<script type="text/javascript">
 			setTimeout(function(){
 				alert("게시글이 삭제되었습니다.");
 				location.href="../image/imageList.html";
 			},100);
 		</script>
-	<c:otherwise>
 	</c:otherwise>
 </c:choose>
 </body>
