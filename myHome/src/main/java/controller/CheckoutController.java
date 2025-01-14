@@ -23,8 +23,14 @@ public class CheckoutController {
 	@RequestMapping(value="/checkout/checkout.html") //cartList.jsp에서 매핑
 	public ModelAndView checkout(User user, Integer TOTAL, HttpSession session) {
 		ModelAndView mav = new ModelAndView("index");
+		LoginUser loginUser = (LoginUser)session.getAttribute("loginUser"); //세션에서 계정을 찾음
 		
-		LoginUser loginUser = (LoginUser)session.getAttribute("loginUser");
+		if(user == null) { //로그인 안하고 결제하기를 누른경우
+			
+		} else {
+			
+		}
+		
 		Cart cart = (Cart)session.getAttribute("CART"); //세션에서 장바구니를 찾음
 		User userInfo = this.userDao.getUserInfo(loginUser.getId());
 		
