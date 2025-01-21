@@ -39,6 +39,11 @@ td.main { width: 30%; border: 1px solid green; }
 				</div>
 				<div id="menu">
 					<a href="../home/index.html">■ 홈으로</a><br/>
+					
+					<c:if test="${sessionScope.loginUser != null }">
+						<a href="../mypage/index.html">■ MY PAGE</a><br/>
+					</c:if>
+					
 					<a href="../write/read.html">■ 게시글 보기</a><br/>
 					<c:if test="${sessionScope.loginUser != null}">
 						<a href="../write/write.html">■ 게시글 쓰기</a><br/>
