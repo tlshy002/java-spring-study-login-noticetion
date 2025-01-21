@@ -5,6 +5,8 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org
 	<persistence-unit name="myhome">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<class>model.User_info</class>
+		<class>model.Sales_tbl</class>
+		<class>model.Sales_detail_tbl</class>
 		<properties>
 			<property name="hibernate.dialect" 
 				value="org.hibernate.dialect.Oracle10gDialect"/>

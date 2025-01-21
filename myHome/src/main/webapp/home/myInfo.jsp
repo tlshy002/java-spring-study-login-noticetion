@@ -13,20 +13,24 @@
 <div align="center">
 <h2>내 정보 보기</h2>
 
-<form:form action="" method="post" modelAttribute="user_info">
+<form:form action="../mypage/modify.html" method="post" modelAttribute="user_info">
 <form:hidden path="gender"/>
 <form:hidden path="birth"/>
 <table>
 	<tr><th>계 정</th><td><form:input path="user_id" readonly="true"/></td></tr>
-	<tr><th>암 호</th><td><form:password path="user_pw" value="${user_info.user_pw }"/></td></tr>
+	<tr><th>암 호</th><td><form:password path="user_pw" value="${user_info.user_pw }"/>
+		<font color="red"><form:errors path="user_pw"/></font></td></tr>
 	<tr><th>이 름</th><td><form:input path="name" readonly="true"/></td></tr>
-	<tr><th>주 소</th><td><form:input path="addr"/></td></tr>
-	<tr><th>전화번호</th><td><form:input path="phone"/></td></tr>
+	<tr><th>주 소</th><td><form:input path="addr"/>
+		<font color="red"><form:errors path="addr"/></font></td></tr>
+	<tr><th>전화번호</th><td><form:input path="phone"/>
+		<font color="red"><form:errors path="phone"/></font></td></tr>
 	<tr><th>성 별</th>
 		<td><c:if test="${user_info.gender =='M' }">남자</c:if>
 			<c:if test="${user_info.gender =='F' }">여자</c:if></td></tr>
 	<tr><th>등 급</th><td><form:input path="grade" readonly="true"/></td></tr>
-	<tr><th>이메일</th><td><form:input path="email"/></td></tr>
+	<tr><th>이메일</th><td><form:input path="email"/>
+		<font color="red"><form:errors path="email"/></font></td></tr>
 	<tr><th>생 일</th><td><input type="date" value="${user_info.birth }" readonly="readonly"></td></tr>
 	<tr><th>직 업</th><td><form:select path="job">
 		<c:choose>
