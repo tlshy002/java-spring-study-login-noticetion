@@ -15,8 +15,15 @@ public class Sales_detail_tbl {
 	private Sales_tbl sale;
 	private String item_id;
 	private Integer quantity;
+	private Integer delivery_state; //배송상태 0:주문완료, 1:배송중, 2:배송완료 
 	
 	
+	public Integer getDelivery_state() {
+		return delivery_state;
+	}
+	public void setDelivery_state(Integer delivery_state) {
+		this.delivery_state = delivery_state;
+	}
 	public Integer getSale_detail_id() {
 		return sale_detail_id;
 	}

@@ -13,7 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import dao.MyInformationDao;
 import dao.SalesDao;
+import dao.SellingItemDao;
 import model.LoginUser;
+import model.SellingItem;
 import model.User_info;
 
 @Controller
@@ -22,8 +24,19 @@ public class MyPageController {
 	private MyInformationDao myInformationDao;
 	@Autowired
 	private SalesDao salesDao;
+	@Autowired
+	private SellingItemDao sellingItemDao;
 	
 	
+	@RequestMapping(value="/mypage/itemdetail.html")
+	public ModelAndView itemdetail(String id) {
+		ModelAndView mav = new ModelAndView("index");
+		SellingItem item = this.sellingItemDao.getItem(id);
+		
+		mav.addObject("BODY", "mypageItemDetail.jsp");
+		mav.addObject(item);
+		return mav;
+	}
 	
 	@RequestMapping(value="/mypage/history.html")
 	public ModelAndView history(HttpSession session) { //계정을 가져와야하니까 session필요

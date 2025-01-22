@@ -16,7 +16,7 @@ public class Sales_tbl {
 	@OneToMany(mappedBy="sale")
 	private Set<Sales_detail_tbl> details;
 	//mappedBy의 의미
-	//Sales_detail_tbl에서 어떤 변수이름으로 Sales_tbl을 참조하는가?
+	//Sales_detail_tbl에서 어떤 변수이름으로 Sales_tbl을 참조하는가? =sale
 	
 	
 
