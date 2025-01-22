@@ -21,8 +21,8 @@ public class SalesDaoImpl implements SalesDao {
 		EntityManager em = this.emf.createEntityManager();
 		List<Object[]> list =
 			em.createQuery(
-					"from Sale_tbl  as sales inner join sales.details"
-					+ "where sales.user_id = :id order by sales.sale_id", Object[].class)
+					"from Sale_tbl  as sales inner join sales.details "
+					+ "where sales.user_id = :id ", Object[].class)
 					.setParameter("id", id).getResultList();
 		return list;
 	}

@@ -3,19 +3,22 @@ package model;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
 public class Sales_tbl {
+	@Id
 	private Integer sale_id;
 	private String user_id;
 	private String sale_time;
 	
 	@OneToMany(mappedBy="sale")
 	private Set<Sales_detail_tbl> details;
-	
 	//mappedBy의 의미
 	//Sales_detail_tbl에서 어떤 변수이름으로 Sales_tbl을 참조하는가?
+	
+	
 
 	public Integer getSale_id() {
 		return sale_id;
